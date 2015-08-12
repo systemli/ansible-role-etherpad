@@ -1,0 +1,11 @@
+- name: ensure monit configs are present
+  copy:
+    src: "monit/conf.d/{{ item }}"
+    dest: "/etc/monit/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+    - redis
+    - etherpad-lite
+  notify: restart monit

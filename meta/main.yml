@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: louis
+  description: role to maintain and configure etherpad lite
+  company: systemli.org
+  license: GPLv3
+  min_ansible_version: 1.6
+  platforms:
+  - name: Debian
+    versions:
+      - jessie
+  categories:
+    - web
+dependencies: []

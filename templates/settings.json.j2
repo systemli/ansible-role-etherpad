@@ -1,0 +1,51 @@
+{
+  "title": "{{ etherpad_title }}",
+  "favicon": "{{ etherpad_favicon }}",
+  "ip": "{{ etherpad_ip }}",
+  "port" : {{ etherpad_port }},
+  "sessionKey": "{{ etherpad_session_key }}",
+  "dbType": "{{ etherpad_db_type }}",
+  "dbSettings": {{ etherpad_db_settings|to_json }},
+  "defaultPadText": {{ etherpad_default_text }},
+  "padOptions": {
+    "noColors": {{ etherpad_pad_options_no_colors }},
+    "showControls": {{ etherpad_pad_options_show_controls }},
+    "showChat": {{ etherpad_pad_options_show_chat }},
+    "showLineNumbers": {{ etherpad_pad_options_show_line_numbers }},
+    "useMonospaceFont": {{ etherpad_pad_options_use_monospace_font }},
+    "userName": {{ etherpad_pad_options_user_name }},
+    "userColor": {{ etherpad_pad_options_user_color }},
+    "rtl": {{ etherpad_pad_options_rtl }},
+    "alwaysShowChat": {{ etherpad_pad_options_always_show_chat }},
+    "chatAndUsers": {{ etherpad_pad_options_chat_and_users }},
+    "lang": "{{ etherpad_pad_options_lang }}"
+  },
+  "suppressErrorsInPadText": {{ etherpad_suppress_errors_in_pad_text }},
+  "requireSession": {{ etherpad_require_session }},
+  "editOnly": {{ etherpad_edit_only }},
+  "sessionNoPassword": {{ etherpad_session_no_password }},
+  "minify": {{ etherpad_minify }},
+  "maxAge": {{ etherpad_max_age }},
+  "abiword": {{ etherpad_abiword }},
+  "allowUnknownFileEnds": {{ etherpad_allow_unknown_file_ends }},
+  "requireAuthentication": {{ etherpad_require_authentication }},
+  "requireAuthorization": {{ etherpad_require_authorization }},
+  "trustProxy": {{ etherpad_trust_proxy }},
+  "disableIPlogging": {{ etherpad_disable_ip_logging }},
+  "users": {
+{% for user in etherpad_users %}
+    "{{ user.name }}": {
+      "password": "{{ user.password }}",
+      "is_admin": {{ user.is_admin }}
+    }
+{% if not loop.last %},{% endif %}
+{% endfor %}
+  },
+  "socketTransportProtocols": {{ etherpad_socket_transport_protocols|to_json }},
+  "loadTest": {{ etherpad_load_test }},
+  "toolbar": {{ etherpad_toolbar|to_json }},
+  "loglevel": "{{ etherpad_log_level }}",
+  "logconfig": {
+      "appenders": {{ etherpad_log_appenders|to_json }}
+  }
+}

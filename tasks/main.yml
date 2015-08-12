@@ -1,0 +1,78 @@
+- name: ensure etherpad user is present
+  user:
+    name: "{{ etherpad_user }}"
+    home: "{{ etherpad_home }}"
+    shell: "/bin/bash"
+    state: present
+
+- name: ensure required packages are installed
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+  with_items: etherpad_required_packages
+
+- name: ensure etherpad is latest
+  git:
+    repo: "{{ etherpad_repository }}"
+    dest: "{{ etherpad_path }}"
+    version: "{{ etherpad_repository_version}}"
+    key_file: "{{ etherpad_repository_key_file}}"
+  become_user: "{{ etherpad_user }}"
+  register: repository
+
+- name: ensure etherpad config is latest
+  template:
+    src: settings.json.j2
+    dest: "{{ etherpad_path }}/settings.json"
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_group }}"
+    mode: 0644
+  become_user: "{{ etherpad_user }}"
+  notify: restart etherpad-lite
+
+- name: ensure redis module for nodejs is present
+  npm:
+    name: redis
+    path: "{{ etherpad_path }}"
+    state: present
+  become_user: "{{ etherpad_user }}"
+  when: "etherpad_db_type == 'redis'"
+
+- name: ensure etherpad dependencies are latest
+  command: bin/installDeps.sh
+  args:
+    chdir: "{{ etherpad_path }}"
+  become_user: "{{ etherpad_user }}"
+  when: repository.changed
+
+- name: ensure etherpad systemd script is latest
+  template:
+    src: etherpad-lite.service.j2
+    dest: /etc/systemd/system/etherpad-lite.service
+    owner: root
+    group: root
+    mode: 0755
+
+- name: ensure etherpad will start after system is booted
+  service:
+    name: etherpad-lite
+    enabled: yes
+
+- name: ensure etherpad api key is latest
+  template:
+    src: APIKEY.txt.j2
+    dest: "{{ etherpad_path }}/APIKEY.txt"
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_group }}"
+    mode: 0640
+  become_user: "{{ etherpad_user }}"
+  notify: restart etherpad-lite
+
+- include: console.yml
+  when: etherpad_console_enabled
+
+- include: munin.yml
+  when: etherpad_munin_enabled
+
+- include: monit.yml
+  when: etherpad_monit_enabled

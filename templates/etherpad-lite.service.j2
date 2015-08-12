@@ -1,0 +1,12 @@
+[Unit]
+Description=etherpad-lite (real-time collaborative document editing)
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User={{ etherpad_user }}
+Group={{ etherpad_group }}
+ExecStart={{ etherpad_path }}/bin/run.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+- name: ensure redis plugins are present
+  file:
+    src: /usr/share/munin-plugins/plugins/redis/redis_
+    dest: "/etc/munin/plugins/{{ item }}"
+    state: link
+  with_items:
+    - redis_connected_clients
+    - redis_per_sec
+    - redis_used_memory
+  notify: restart munin-node

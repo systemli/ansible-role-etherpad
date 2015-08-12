@@ -1,0 +1,14 @@
+- name: restart etherpad-lite
+  service:
+    name: etherpad-lite
+    state: restarted
+
+- name: restart munin-node
+  service:
+    name: munin-node
+    state: restarted
+
+- name: restart monit
+  service:
+    name: monit
+    state: restarted

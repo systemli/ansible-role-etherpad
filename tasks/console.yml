@@ -1,0 +1,14 @@
+- name: ensure etherpad packages are installed
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+     - php5-cli
+     - php5-curl
+     - php5-sqlite
+
+- name: ensure etherpad-lite-console is present
+  git:
+    repo: https://github.com/0x46616c6b/etherpad-lite-console
+    dest: "{{ etherpad_console_path }}"
+  become_user: "{{ etherpad_user }}"
