@@ -29,11 +29,21 @@ Defaults:
     etherpad_favicon: "favicon.ico"
     etherpad_ip: 0.0.0.0
     etherpad_port: 9001
-    etherpad_db_type: redis
+    etherpad_db_type: redis #alternative: dirty or mysql
+    # Setting for Redis
     etherpad_db_settings:
       host: localhost
       port: 6379
       database: 0
+    # Setting for dirty.db
+    #etherpad_db_settings:
+      #filename: "var/dirty.db"
+    # Setting for MySQL
+    #etherpad_db_settings:
+      #user: "root"
+      #host: "localhost"
+      #password: "password"
+      #database: "store"
     etherpad_users: []
       #  -
       #    name: admin
