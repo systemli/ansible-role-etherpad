@@ -84,7 +84,6 @@ Defaults:
       timesloder:
         - ["timeslider_export", "timeslider_returnToPad"]
     etherpad_console_enabled: False
-    etherpad_munin_enabled: False
     etherpad_monit_enabled: False
 
 Example Playbook

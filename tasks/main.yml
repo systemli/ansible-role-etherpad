@@ -71,8 +71,5 @@
 - include: console.yml
   when: etherpad_console_enabled
 
-- include: munin.yml
-  when: etherpad_munin_enabled
-
 - include: monit.yml
   when: etherpad_monit_enabled
