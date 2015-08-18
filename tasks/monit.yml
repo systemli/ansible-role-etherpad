@@ -6,6 +6,5 @@
     group: root
     mode: 0600
   with_items:
-    - redis
     - etherpad-lite
   notify: restart monit
