@@ -1,6 +1,5 @@
 etherpad_required_packages:
   - nodejs
-  - nodejs-legacy
   - npm
   - git
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"

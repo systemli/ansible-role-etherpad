@@ -11,6 +11,12 @@
     state: installed
   with_items: etherpad_required_packages
 
+- name: ensure nodejs-legacy is installed
+  apt:
+    pkg: nodejs-legacy
+    state: installed
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == 'jessie'
+
 - name: ensure etherpad is latest
   git:
     repo: "{{ etherpad_repository }}"
