@@ -1,14 +1,14 @@
 ansible-etherpad
 ================
 
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/list#/roles/4758) [![Build Status](https://travis-ci.org/systemli/ansible-etherpad.svg)](https://travis-ci.org/systemli/ansible-etherpad)
+
 Role to install & maintain Etherpad Lite
 
 Role Variables
 --------------
 
-The playbook requires no special configuration, but offers a bunch of options.
-
-**Important**: You must set the `etherpad_api_key`!
+The playbook requires special configuration. You must set the `etherpad_api_key`!
 
 Defaults:
 
