@@ -28,7 +28,8 @@ etherpad_users: []
 etherpad_api_key: ""
 etherpad_session_key: "Y7sc5qSXw5aEBIDGsjfkyLJDV"
 etherpad_disable_ip_logging: "true"
-etherpad_default_text: '"Welcome to Etherpad!\\n\\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\\n\\nGet involved with Etherpad at http:\\/\\/etherpad.org\\n"'etherpad_pad_options_no_colors: "false"
+etherpad_default_text: '"Welcome to Etherpad!\\n\\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\\n\\nGet involved with Etherpad at http:\\/\\/etherpad.org\\n"'
+etherpad_pad_options_no_colors: "false"
 etherpad_pad_options_show_controls: "true"
 etherpad_pad_options_show_chat: "true"
 etherpad_pad_options_show_line_numbers: "true"
