@@ -4,6 +4,13 @@
   "ip": "{{ etherpad_ip }}",
   "port" : {{ etherpad_port }},
   "sessionKey": "{{ etherpad_session_key }}",
+{% if etherpad_ssl_enabled %}
+  "ssl" : {
+            "key"  : "{{ etherpad_ssl_key }}",
+            "cert" : "{{ etherpad_ssl_cert }}",
+            "ca": ["{{ etherpad_ssl_ca_intermediate_cert1 }}", "{{ etherpad_ssl_ca_intermediate_cert2 }}"]
+          },
+{% endif %}
   "dbType": "{{ etherpad_db_type }}",
   "dbSettings": {{ etherpad_db_settings|to_json }},
   "defaultPadText": {{ etherpad_default_text }},
@@ -27,6 +34,8 @@
   "minify": {{ etherpad_minify }},
   "maxAge": {{ etherpad_max_age }},
   "abiword": {{ etherpad_abiword }},
+  "soffice": {{ etherpad_soffice }},
+  "tidyHtml": {{ etherpad_tidyhtml }},
   "allowUnknownFileEnds": {{ etherpad_allow_unknown_file_ends }},
   "requireAuthentication": {{ etherpad_require_authentication }},
   "requireAuthorization": {{ etherpad_require_authorization }},
@@ -43,9 +52,14 @@
   },
   "socketTransportProtocols": {{ etherpad_socket_transport_protocols|to_json }},
   "loadTest": {{ etherpad_load_test }},
+  "indentationOnNewLine": {{ etherpad_indentation_on_new_line }},
   "toolbar": {{ etherpad_toolbar|to_json }},
   "loglevel": "{{ etherpad_log_level }}",
-  "logconfig": {
-      "appenders": {{ etherpad_log_appenders|to_json }}
-  }
+  "logconfig":
+   { "appenders": [
+{% for appender in etherpad_log_appenders %}
+    {% if not loop.first %},{% endif %}{{ appender|to_json }}
+{% endfor %}
+      ]
+   }
 }

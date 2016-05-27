@@ -14,7 +14,6 @@ Defaults:
 
     etherpad_required_packages:
       - nodejs
-      - nodejs-legacy
       - npm
       - git
     etherpad_repository: "https://github.com/ether/etherpad-lite.git"
@@ -29,26 +28,21 @@ Defaults:
     etherpad_favicon: "favicon.ico"
     etherpad_ip: 0.0.0.0
     etherpad_port: 9001
-    etherpad_db_type: redis #alternative: dirty or mysql
-    # Setting for Redis
+    etherpad_ssl_enabled: False
+    etherpad_ssl_key: "/path-to-your/epl-server.key"
+    etherpad_ssl_cert: "/path-to-your/epl-server.crt"
+    etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
+    etherpad_ssl_ca_intermediate_cert2: "/path-to-your/epl-intermediate-cert2.crt"
+    etherpad_db_type: redis
     etherpad_db_settings:
       host: localhost
       port: 6379
       database: 0
-    # Setting for dirty.db
-    #etherpad_db_settings:
-      #filename: "var/dirty.db"
-    # Setting for MySQL
-    #etherpad_db_settings:
-      #user: "root"
-      #host: "localhost"
-      #password: "password"
-      #database: "store"
     etherpad_users: []
-      #  -
-      #    name: admin
-      #    password: ""
-      #    is_admin: "true"
+    #  -
+    #    name: admin
+    #    password: ""
+    #    is_admin: "true"
     etherpad_api_key: ""
     etherpad_session_key: "Y7sc5qSXw5aEBIDGsjfkyLJDV"
     etherpad_disable_ip_logging: "true"
@@ -71,16 +65,15 @@ Defaults:
     etherpad_minify: "true"
     etherpad_max_age: 21600
     etherpad_abiword: "null"
+    etherpad_soffice: "null"
+    etherpad_tidyhtml: "null"
     etherpad_allow_unknown_file_ends: "true"
     etherpad_require_authentication: "false"
     etherpad_require_authorization: "false"
     etherpad_trust_proxy: "false"
-    etherpad_log_level: "INFO"
-    etherpad_log_appenders:
-      -
-        type: console
     etherpad_socket_transport_protocols: ["xhr-polling", "jsonp-polling", "htmlfile"]
     etherpad_load_test: "false"
+    etherpad_indentation_on_new_line: "false"
     etherpad_toolbar:
       left:
         - ["bold", "italic", "underline", "strikethrough"]
@@ -91,8 +84,17 @@ Defaults:
         - ["importexport", "timeslider", "savedrevision"]
         - ["settings", "embed"]
         - ["showusers"]
-      timesloder:
+      timeslider:
         - ["timeslider_export", "timeslider_returnToPad"]
+    etherpad_log_level: "INFO"
+    etherpad_log_appenders:
+      -
+        type: console
+    #  -
+    #    type: file
+    #    filename: your-log-file-here.log
+    #    maxLogSize: 1024
+    #    backups: 3
     etherpad_console_enabled: False
     etherpad_monit_enabled: False
 
