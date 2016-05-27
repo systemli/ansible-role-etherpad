@@ -9,7 +9,7 @@
   apt:
     pkg: "{{ item }}"
     state: installed
-  with_items: etherpad_required_packages
+  with_items: "{{ etherpad_required_packages }}"
 
 - name: ensure nodejs-legacy is installed
   apt:
