@@ -1,14 +1,17 @@
 ---
 galaxy_info:
-  author: louis
+  author: systemli
   description: role to maintain and configure etherpad lite
   company: systemli.org
   license: GPLv3
-  min_ansible_version: 1.9.1
+  min_ansible_version: 1.9.6
   platforms:
-  - name: Debian
-    versions:
-      - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - trusty
   categories:
     - web
 dependencies: []
