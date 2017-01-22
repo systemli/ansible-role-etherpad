@@ -1,7 +1,7 @@
 ansible-etherpad
 ================
 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/list#/roles/4758) [![Build Status](https://travis-ci.org/systemli/ansible-etherpad.svg)](https://travis-ci.org/systemli/ansible-etherpad)
+[![Build Status](https://travis-ci.org/systemli/ansible-etherpad.svg)](https://travis-ci.org/systemli/ansible-etherpad) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
 Role to install & maintain Etherpad Lite
 
@@ -98,14 +98,26 @@ Defaults:
     etherpad_console_enabled: False
     etherpad_monit_enabled: False
 
+Download
+--------
+
+Download latest release with `ansible-galaxy`
+
+	ansible-galaxy install systemli.etherpad
+
 Example Playbook
 ----------------
 
     - hosts: servers
       roles:
-         - { role: 0x46616c6b.etherpad }
+         - { role: systemli.etherpad }
 
 License
 -------
 
 GPLv3
+
+Author Information
+------------------
+
+https://www.systemli.org
