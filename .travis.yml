@@ -1,6 +1,11 @@
 ---
-language: python
-python: "2.7"
+language: node_js
+node_js:
+  - "5"
+  - "4"
+  - "0.12"
+  - "0.11"
+  - "0.10"
 
 env:
   - ANSIBLE_VERSION=1.9.1
@@ -10,8 +15,7 @@ env:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y npm
-  - sudo npm conf set strict-ssl false
+  - sudo apt-get install -y python python-pip
 
 install:
   # Install Ansible.
