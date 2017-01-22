@@ -15,7 +15,7 @@
   apt:
     pkg: nodejs-legacy
     state: installed
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == 'jessie'
+  when: (ansible_distribution == 'Debian' and ansible_distribution_version == 'jessie') or ansible_distribution == 'Ubuntu'
 
 - name: ensure etherpad is latest
   git:
@@ -58,6 +58,16 @@
     owner: root
     group: root
     mode: 0755
+  when: (ansible_distribution == 'Debian' and ansible_distribution_version == 'jessie')
+
+- name: ensure etherpad sysvinit script is latest
+  template:
+    src: etherpad-lite.sysvinit.j2
+    dest: /etc/init.d/etherpad-lite
+    owner: root
+    group: root
+    mode: 0755
+  when: ansible_distribution == 'Ubuntu'
 
 - name: ensure etherpad will start after system is booted
   service:
