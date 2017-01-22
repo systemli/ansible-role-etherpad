@@ -1,11 +1,6 @@
 ---
-language: node_js
-node_js:
-  - "5"
-  - "4"
-  - "0.12"
-  - "0.11"
-  - "0.10"
+language: python
+python: "2.7"
 
 env:
   - ANSIBLE_VERSION=1.9.1
@@ -14,12 +9,12 @@ env:
   - ANSIBLE_VERSION=2.2.1.0
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y python python-pip
+  - curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
+  - sudo apt-get install -y nodejs
 
 install:
   # Install Ansible.
-  - sudo pip install ansible==$ANSIBLE_VERSION
+  - pip install ansible==$ANSIBLE_VERSION
 
   # Add ansible.cfg to pick up roles path.
   - printf "[defaults]\nroles_path = ../" > ansible.cfg
