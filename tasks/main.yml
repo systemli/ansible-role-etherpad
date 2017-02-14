@@ -1,3 +1,11 @@
+---
+
+- name: allow overcommiting of memory
+  sysctl:
+    name: vm.overcommit_memory
+    value: "1"
+    state: present
+
 - name: ensure etherpad user is present
   user:
     name: "{{ etherpad_user }}"
