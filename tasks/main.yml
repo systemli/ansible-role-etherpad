@@ -97,6 +97,15 @@
   become_user: "{{ etherpad_user }}"
   notify: restart etherpad-lite
 
+- name: install etherpad plugins
+  npm:
+    name: "{{ item }}"
+    path: "{{ etherpad_path }}"
+    state: present
+  become: true
+  become_user: "{{ etherpad_user }}"
+  with_items: "{{ etherpad_plugins|d() }}"
+ 
 - include: console.yml
   when: etherpad_console_enabled
 
