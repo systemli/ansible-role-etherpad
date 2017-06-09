@@ -3,9 +3,9 @@
     pkg: "{{ item }}"
     state: installed
   with_items:
-     - php5-cli
-     - php5-curl
-     - php5-sqlite
+     - "{{ 'php5-cli' if ansible_distribution_release == 'jessie' else 'php-cli' }}"
+     - "{{ 'php5-curl' if ansible_distribution_release == 'jessie' else 'php-curl' }}"
+     - "{{ 'php5-sqlite' if ansible_distribution_release == 'jessie' else 'php-sqlite3' }}"
 
 - name: ensure etherpad-lite-console is present
   git:
