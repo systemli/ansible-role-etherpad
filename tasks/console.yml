@@ -11,4 +11,5 @@
   git:
     repo: https://github.com/0x46616c6b/etherpad-lite-console
     dest: "{{ etherpad_console_path }}"
+  become: true
   become_user: "{{ etherpad_user }}"

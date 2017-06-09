@@ -31,6 +31,7 @@
     dest: "{{ etherpad_path }}"
     version: "{{ etherpad_repository_version}}"
     key_file: "{{ etherpad_repository_key_file}}"
+  become: true
   become_user: "{{ etherpad_user }}"
   register: repository
 
@@ -41,6 +42,7 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: 0644
+  become: true
   become_user: "{{ etherpad_user }}"
   notify: restart etherpad-lite
 
@@ -49,6 +51,7 @@
     name: redis
     path: "{{ etherpad_path }}"
     state: present
+  become: true
   become_user: "{{ etherpad_user }}"
   when: "etherpad_db_type == 'redis'"
 
@@ -56,6 +59,7 @@
   command: bin/installDeps.sh
   args:
     chdir: "{{ etherpad_path }}"
+  become: true
   become_user: "{{ etherpad_user }}"
   when: repository.changed
 
@@ -89,6 +93,7 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: 0640
+  become: true
   become_user: "{{ etherpad_user }}"
   notify: restart etherpad-lite
 
