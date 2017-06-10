@@ -1,5 +1,5 @@
 check process etherpad-lite
-    matching "run.sh"
+    matching "etherpad-lite/node/server.js"
     start program = "/usr/sbin/service etherpad-lite start" with timeout 60 seconds
     stop program  = "/usr/sbin/service etherpad-lite stop"
     group server
