@@ -12,6 +12,7 @@ etherpad_path: "{{ etherpad_home }}/etherpad-lite"
 etherpad_console_path: "{{ etherpad_home }}/etherpad-lite-console"
 etherpad_title: "Etherpad"
 etherpad_favicon: "favicon.ico"
+#etherpad_favicon_path: ""
 etherpad_ip: 0.0.0.0
 etherpad_port: 9001
 etherpad_ssl_enabled: False

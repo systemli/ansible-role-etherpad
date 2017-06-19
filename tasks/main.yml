@@ -106,6 +106,16 @@
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
  
+- name: copy custom favicon.ico
+  copy:
+    src: "{{ etherpad_favicon_path }}"
+    dest: "{{ etherpad_path }}/src/static/favicon.ico"
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_group }}"
+    mode: 0644
+  when: etherpad_favicon_path|d()
+  notify: restart etherpad-lite
+
 - include: console.yml
   when: etherpad_console_enabled
 
