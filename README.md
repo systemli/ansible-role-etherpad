@@ -105,12 +105,10 @@ Defaults:
     # list of etherpad plugins to be installed
     etherpad_plugins: []
 
-Download
+Dependencies
 --------
 
-Download latest release with `ansible-galaxy`
-
-	ansible-galaxy install systemli.etherpad
+ * geerlingguy.nodejs
 
 Example Playbook
 ----------------

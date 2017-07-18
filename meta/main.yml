@@ -15,4 +15,4 @@ galaxy_info:
   categories:
     - web
 dependencies:
-  - { role: geerlingguy.nodejs }
+  - geerlingguy.nodejs
