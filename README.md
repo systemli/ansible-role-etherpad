@@ -3,7 +3,13 @@ ansible-etherpad
 
 [![Build Status](https://travis-ci.org/systemli/ansible-etherpad.svg)](https://travis-ci.org/systemli/ansible-etherpad) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
-Role to install & maintain Etherpad Lite
+Role to install & maintain Etherpad Lite. Tested with [Molecule](https://molecule.readthedocs.io/en/master/) and [Tox](https://tox.readthedocs.org/).
+
+Requirements
+------------
+
+Debian.
+Molecule, Tox and Docker for testing.
 
 Role Variables
 --------------
@@ -13,8 +19,7 @@ The playbook requires special configuration. You must set the `etherpad_api_key`
 Defaults:
 
     etherpad_required_packages:
-      - nodejs
-      - npm
+      - curl
       - git
     etherpad_repository: "https://github.com/ether/etherpad-lite.git"
     etherpad_repository_key_file: ""
