@@ -105,7 +105,7 @@
   become: true
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
- 
+
 - include: console.yml
   when: etherpad_console_enabled
 
