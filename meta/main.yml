@@ -14,4 +14,5 @@ galaxy_info:
         - trusty
   categories:
     - web
-dependencies: []
+dependencies:
+  - { role: geerlingguy.nodejs }

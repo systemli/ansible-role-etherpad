@@ -1,6 +1,5 @@
 etherpad_required_packages:
-  - nodejs
-  - npm
+  - curl
   - git
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"
 etherpad_repository_key_file: ""
