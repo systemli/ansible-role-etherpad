@@ -1,6 +1,7 @@
 etherpad_required_packages:
   - curl
   - git
+  - procps
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"
 etherpad_repository_key_file: ""
 etherpad_repository_version: "master"

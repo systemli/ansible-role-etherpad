@@ -1,11 +1,5 @@
 ---
 
-- name: allow overcommiting of memory
-  sysctl:
-    name: vm.overcommit_memory
-    value: "1"
-    state: present
-
 - name: ensure etherpad user is present
   user:
     name: "{{ etherpad_user }}"
@@ -24,6 +18,12 @@
     pkg: nodejs-legacy
     state: installed
   when: (ansible_distribution == 'Debian' and ansible_distribution_major_version <= 8) or ansible_distribution == 'Ubuntu'
+
+- name: allow overcommiting of memory
+  sysctl:
+    name: vm.overcommit_memory
+    value: "1"
+    state: present
 
 - name: ensure etherpad is latest
   git:
@@ -63,7 +63,7 @@
   become_user: "{{ etherpad_user }}"
   when: repository.changed
 
-- name: ensure etherpad systemd script is latest
+- name: ensure etherpad systemd unit is latest
   template:
     src: etherpad-lite.service.j2
     dest: /etc/systemd/system/etherpad-lite.service
