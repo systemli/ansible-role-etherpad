@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: debian-stretch
+    image: maint/debian-systemd
+    privileged: True
+  - name: debian-jessie
+    image: maint/debian-systemd
+    privileged: True
+provisioner:
+  name: ansible
+  options:
+    skip-tags: molecule_test_skip
+  lint:
+    name: ansible-lint
+    enabled: False
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
