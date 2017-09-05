@@ -113,7 +113,7 @@
     backup: yes
   become: true
   become_user: "{{ etherpad_user }}"
-  when: "{{ etherpad_plugins|intersect('ep_hide_referrer')|length > 0 }}"
+  when: etherpad_plugins|intersect('ep_hide_referrer')|length > 0
   notify: restart etherpad-lite
 
 - include: console.yml
