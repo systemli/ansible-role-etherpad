@@ -8,11 +8,17 @@ lint:
   enabled: False
 platforms:
   - name: debian-stretch
-    image: maint/debian-systemd
+    image: geerlingguy/docker-debian9-ansible
     privileged: True
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
   - name: debian-jessie
-    image: maint/debian-systemd
+    image: geerlingguy/docker-debian8-ansible
     privileged: True
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
 provisioner:
   name: ansible
   options:
