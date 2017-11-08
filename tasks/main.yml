@@ -18,6 +18,8 @@
     name: vm.overcommit_memory
     value: "1"
     state: present
+    sysctl_path: /etc/sysctl.d/90-ansible-vm.conf
+    sysctl_set: yes
 
 - name: ensure etherpad is latest
   git:
