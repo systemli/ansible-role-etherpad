@@ -13,3 +13,11 @@
     dest: "{{ etherpad_console_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
+
+- name: ensure purge cronjob is latest
+  cron:
+    name: "etherpad-lite-console pad purge command"
+    job: "{{ etherpad_console_path }}/bin/console pad:purge --apikey={{ etherpad_api_key }} --days={{ etherpad_console_purge_delay }}"
+    hour: "4"
+    minute: "0"
+    state: "{% if etherpad_console_purge_enabled %}present{% else %}absent{% endif %}"

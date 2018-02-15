@@ -29,6 +29,8 @@ Defaults:
     etherpad_home: "/home/etherpad"
     etherpad_path: "{{ etherpad_home }}/etherpad-lite"
     etherpad_console_path: "{{ etherpad_home }}/etherpad-lite-console"
+    etherpad_console_purge_delay: 30
+    etherpad_console_purge_enabled: False
     etherpad_title: "Etherpad"
     etherpad_favicon: "favicon.ico"
     etherpad_ip: 0.0.0.0
