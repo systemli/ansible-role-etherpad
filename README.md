@@ -1,7 +1,7 @@
-ansible-etherpad
+ansible-role-etherpad
 ================
 
-[![Build Status](https://travis-ci.org/systemli/ansible-etherpad.svg)](https://travis-ci.org/systemli/ansible-etherpad) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
+[![Build Status](https://travis-ci.org/systemli/ansible-role-etherpad.svg)](https://travis-ci.org/systemli/ansible-role-etherpad) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
 Role to install & maintain Etherpad Lite. Tested with [Molecule](https://molecule.readthedocs.io/en/master/) and [Tox](https://tox.readthedocs.org/).
 
@@ -29,6 +29,8 @@ Defaults:
     etherpad_home: "/home/etherpad"
     etherpad_path: "{{ etherpad_home }}/etherpad-lite"
     etherpad_console_path: "{{ etherpad_home }}/etherpad-lite-console"
+    etherpad_console_purge_delay: 30
+    etherpad_console_purge_enabled: False
     etherpad_title: "Etherpad"
     etherpad_favicon: "favicon.ico"
     etherpad_ip: 0.0.0.0
