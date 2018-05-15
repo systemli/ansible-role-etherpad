@@ -107,8 +107,6 @@
     src: "ep_hide_referrer/index.js.patch"
     dest: "{{ etherpad_path }}/node_modules/ep_hide_referrer/static/js/index.js"
     backup: yes
-  become: true
-  become_user: "{{ etherpad_user }}"
   when: etherpad_plugins|intersect('ep_hide_referrer')|length > 0
   notify: restart etherpad-lite
 
