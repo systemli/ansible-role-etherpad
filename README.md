@@ -1,18 +1,11 @@
-ansible-role-etherpad
-================
+# ansible-role-etherpad
+
 
 [![Build Status](https://travis-ci.org/systemli/ansible-role-etherpad.svg)](https://travis-ci.org/systemli/ansible-role-etherpad) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
-Role to install & maintain Etherpad Lite. Tested with [Molecule](https://molecule.readthedocs.io/en/master/) and [Tox](https://tox.readthedocs.org/).
+Role to install & maintain Etherpad Lite.
 
-Requirements
-------------
-
-Debian.
-Molecule, Tox and Docker for testing.
-
-Role Variables
---------------
+## Role Variables
 
 The playbook requires special configuration. You must set the `etherpad_api_key`!
 
@@ -107,24 +100,20 @@ Defaults:
     # list of etherpad plugins to be installed
     etherpad_plugins: []
 
-Dependencies
---------
+## Dependencies
 
  * geerlingguy.nodejs
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: servers
       roles:
          - { role: systemli.etherpad }
 
-License
--------
+## License
 
 GPLv3
 
-Author Information
-------------------
+## Author Information
 
 https://www.systemli.org
