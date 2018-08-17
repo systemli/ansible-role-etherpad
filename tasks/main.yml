@@ -25,8 +25,8 @@
   git:
     repo: "{{ etherpad_repository }}"
     dest: "{{ etherpad_path }}"
-    version: "{{ etherpad_repository_version}}"
-    key_file: "{{ etherpad_repository_key_file}}"
+    version: "{{ etherpad_repository_version }}"
+    key_file: "{{ etherpad_repository_key_file }}"
   become: true
   become_user: "{{ etherpad_user }}"
   register: repository
