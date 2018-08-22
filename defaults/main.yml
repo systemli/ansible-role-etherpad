@@ -23,7 +23,7 @@ etherpad_ssl_key: "/path-to-your/epl-server.key"
 etherpad_ssl_cert: "/path-to-your/epl-server.crt"
 etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
 etherpad_ssl_ca_intermediate_cert2: "/path-to-your/epl-intermediate-cert2.crt"
-etherpad_db_type: redis
+etherpad_db_type: dirty
 etherpad_users: []
 #  -
 #    name: admin
@@ -99,3 +99,5 @@ etherpad_mysql_database_port: 3306
 etherpad_mysql_database_engine: InnoDB
 etherpad_mysql_database_collation: utf8mb4_bin
 etherpad_mysql_database_charset: utf8mb4
+
+etherpad_dirty_filename: "var/dirty.db"

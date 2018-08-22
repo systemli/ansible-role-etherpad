@@ -13,6 +13,11 @@
           },
 {% endif %}
   "dbType": "{{ etherpad_db_type }}",
+{% if etherpad_db_type %}
+  "dbSettings" : {
+    "filename" : "{{ etherpad_dirty_filename }}"
+  },
+{% endif %}
 {% if etherpad_db_type == "mysql" %}
   "dbSettings" : {
     "user"    : "{{ etherpad_mysql_database_user }}",
