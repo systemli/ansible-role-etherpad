@@ -23,10 +23,6 @@ etherpad_ssl_cert: "/path-to-your/epl-server.crt"
 etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
 etherpad_ssl_ca_intermediate_cert2: "/path-to-your/epl-intermediate-cert2.crt"
 etherpad_db_type: redis
-etherpad_db_settings:
-  host: localhost
-  port: 6379
-  database: 0
 etherpad_users: []
 #  -
 #    name: admin
@@ -88,3 +84,17 @@ etherpad_console_enabled: False
 etherpad_monit_enabled: False
 # list of etherpad plugins to be installed
 etherpad_plugins: []
+
+etherpad_redis_host: localhost
+etherpad_redis_port: 6379
+etherpad_redis_database: 0
+
+etherpad_mysql_database_host: localhost
+etherpad_mysql_database_name: etherpad
+etherpad_mysql_database_user: etherpad
+etherpad_mysql_database_password:
+etherpad_mysql_database_port: 3306
+# Recommendation for large setups is MyISAM
+etherpad_mysql_database_engine: InnoDB
+etherpad_mysql_database_collation: utf8mb4_bin
+etherpad_mysql_database_charset: utf8mb4
