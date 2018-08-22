@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS `store` (
+  `key` varchar(100) COLLATE {{ etherpad_mysql_database_collation }} NOT NULL DEFAULT '',
+  `value` longtext COLLATE {{ etherpad_mysql_database_collation }} NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE={{ etherpad_mysql_database_engine }} DEFAULT CHARSET={{ etherpad_mysql_database_charset }} COLLATE={{ etherpad_mysql_database_collation }}

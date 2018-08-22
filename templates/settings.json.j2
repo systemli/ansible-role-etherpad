@@ -1,3 +1,4 @@
+#jinja2: lstrip_blocks: True
 {
   "title": "{{ etherpad_title }}",
   "favicon": "{{ etherpad_favicon }}",
@@ -12,7 +13,23 @@
           },
 {% endif %}
   "dbType": "{{ etherpad_db_type }}",
-  "dbSettings": {{ etherpad_db_settings|to_json }},
+{% if etherpad_db_type == "mysql" %}
+  "dbSettings" : {
+    "user"    : "{{ etherpad_mysql_database_user }}",
+    "host"    : "{{ etherpad_mysql_database_host }}",
+    "port"    : {{ etherpad_mysql_database_port }},
+    "password": "{{ etherpad_mysql_database_password }}",
+    "database": "{{ etherpad_mysql_database_name }}",
+    "charset" : "{{ etherpad_mysql_database_charset }}"
+  },
+{% endif %}
+{% if etherpad_db_type == "redis" %}
+  "dbSettings" : {
+    "host"    : "{{ etherpad_redis_host }}",
+    "port"    : "{{ etherpad_redis_port }}",
+    "database": {{ etherpad_redis_database }},
+  },
+{% endif %}
   "defaultPadText": {{ etherpad_default_text }},
   "padOptions": {
     "noColors": {{ etherpad_pad_options_no_colors }},
@@ -58,7 +75,8 @@
   "logconfig":
    { "appenders": [
 {% for appender in etherpad_log_appenders %}
-    {% if not loop.first %},{% endif %}{{ appender|to_json }}
+    {% if not loop.first %},{% endif %}
+    {{ appender|to_json }}
 {% endfor %}
       ]
    }
