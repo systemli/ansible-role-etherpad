@@ -13,7 +13,7 @@
           },
 {% endif %}
   "dbType": "{{ etherpad_db_type }}",
-{% if etherpad_db_type %}
+{% if etherpad_db_type == "dirty" %}
   "dbSettings" : {
     "filename" : "{{ etherpad_dirty_filename }}"
   },
