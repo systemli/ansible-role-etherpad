@@ -1,5 +1,4 @@
 ---
-
 - name: ensure etherpad user is present
   user:
     name: "{{ etherpad_user }}"

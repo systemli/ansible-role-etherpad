@@ -1,3 +1,4 @@
+---
 etherpad_required_packages:
   - curl
   - git
