@@ -2,7 +2,7 @@
 - name: ensure etherpad packages are installed
   apt:
     pkg: "{{ item }}"
-    state: installed
+    state: present
   with_items:
      - "{{ 'php5-cli' if ansible_distribution_major_version|int <= 8 else 'php-cli' }}"
      - "{{ 'php5-curl' if ansible_distribution_major_version|int <= 8 else 'php-curl' }}"

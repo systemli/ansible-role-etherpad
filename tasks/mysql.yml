@@ -2,7 +2,7 @@
 - name: ensure python-mysqldb is installed
   apt:
     pkg: python-mysqldb
-    state: installed
+    state: present
 
 - name: ensure mysql database is present
   mysql_db:
