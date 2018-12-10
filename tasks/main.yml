@@ -1,4 +1,13 @@
 ---
+
+- name: ensure apt_preferences include file for deb.nodesource.com is present
+  copy:
+    src: apt/preferences.d/deb.nodesource.com.pref
+    dest: /etc/apt/preferences.d/deb.nodesource.com.pref
+    mode: 0644
+    owner: root
+    group: root
+
 - name: ensure etherpad user is present
   user:
     name: "{{ etherpad_user }}"
