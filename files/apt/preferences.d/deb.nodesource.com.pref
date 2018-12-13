@@ -6,3 +6,7 @@
 Package: *
 Pin: origin "deb.nodesource.com"
 Pin-Priority: 100
+
+Package: nodejs
+Pin: origin "deb.nodesource.com"
+Pin-Priority: 500
