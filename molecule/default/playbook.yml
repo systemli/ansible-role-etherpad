@@ -4,3 +4,5 @@
   become: True
   roles:
     - role: ansible-role-etherpad
+  vars:
+    nodejs_install_npm_user: root
