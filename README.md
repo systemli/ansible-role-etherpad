@@ -33,6 +33,7 @@ Defaults:
     etherpad_ssl_cert: "/path-to-your/epl-server.crt"
     etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
     etherpad_ssl_ca_intermediate_cert2: "/path-to-your/epl-intermediate-cert2.crt"
+    etherpad_skin_name: "no-skin"
     etherpad_db_type: dirty
     etherpad_users: []
     #  -

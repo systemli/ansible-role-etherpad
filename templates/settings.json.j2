@@ -1,7 +1,7 @@
 #jinja2: lstrip_blocks: True
 {
   "title": "{{ etherpad_title }}",
-  "favicon": "{{ etherpad_favicon }}",
+  "favicon": "{{ etherpad_favicon }}",
   "ip": "{{ etherpad_ip }}",
   "port" : {{ etherpad_port }},
   "sessionKey": "{{ etherpad_session_key }}",
@@ -12,6 +12,7 @@
             "ca": ["{{ etherpad_ssl_ca_intermediate_cert1 }}", "{{ etherpad_ssl_ca_intermediate_cert2 }}"]
           },
 {% endif %}
+  "skinName": "{{ etherpad_skin_name }}",
   "dbType": "{{ etherpad_db_type }}",
 {% if etherpad_db_type == "dirty" %}
   "dbSettings" : {
@@ -72,7 +73,7 @@
 {% if not loop.last %},{% endif %}
 {% endfor %}
   },
-  "socketTransportProtocols": {{ etherpad_socket_transport_protocols|to_json }},
+  "socketTransportProtocols": {{ etherpad_socket_transport_protocols|to_json }},
   "loadTest": {{ etherpad_load_test }},
   "indentationOnNewLine": {{ etherpad_indentation_on_new_line }},
   "toolbar": {{ etherpad_toolbar|to_json }},
