@@ -64,13 +64,26 @@
   "requireAuthorization": {{ etherpad_require_authorization }},
   "trustProxy": {{ etherpad_trust_proxy }},
   "disableIPlogging": {{ etherpad_disable_ip_logging }},
+{% if 'ep_table_of_contents' in etherpad_plugins %}
+  "ep_toc": {
+    "disable_by_default": {{ etherpad_toc_disable }}
+  },
+{% endif %}
+{% if 'ep_auth_author' in etherpad_plugins and etherpad_auth_author_prefix is defined %}
+  "ep_auth_author": {
+    "prefix": "{{ etherpad_auth_author_prefix }}"
+  },
+{% endif %}
   "users": {
 {% for user in etherpad_users %}
-    "{{ user.name }}": {
+    "{% if user.auth_author is defined and user.auth_author %}{{ etherpad_auth_author_prefix }}{% endif %}{{ user.name }}": {
       "password": "{{ user.password }}",
+{% if user.auth_author is defined and user.auth_author %}
+      "author_name": "{{ user.name }}",
+{% endif %}
       "is_admin": {{ user.is_admin }}
-    }
-{% if not loop.last %},{% endif %}
+    }{% if not loop.last %},{% endif %}
+
 {% endfor %}
   },
   "socketTransportProtocols": {{ etherpad_socket_transport_protocols|to_json }},

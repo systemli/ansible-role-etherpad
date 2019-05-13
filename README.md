@@ -116,6 +116,12 @@ Defaults:
     # Dirty settings
     etherpad_dirty_filename: "var/dirty.db"
 
+    # Settings for plugin 'ep_table_of_contents'
+    etherpad_toc_disable: "true"
+
+    # Settings for plugin 'ep_auth_author'
+    #etherpad_auth_author_prefix:
+
 ## Dependencies
 
  * geerlingguy.nodejs

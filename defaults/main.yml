@@ -105,3 +105,9 @@ etherpad_mysql_database_collation: utf8mb4_bin
 etherpad_mysql_database_charset: utf8mb4
 
 etherpad_dirty_filename: "var/dirty.db"
+
+# Settings for plugin 'ep_table_of_contents'
+etherpad_toc_disable: "true"
+
+# Settings for plugin 'ep_auth_author'
+#etherpad_auth_author_prefix:
