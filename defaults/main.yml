@@ -17,6 +17,7 @@ etherpad_console_purge_jobs:
   - "--days=365 --suffix=-keep"
   - "--days=30 --ignore-suffix=-keep --ignore-suffix=-temp"
 etherpad_console_purge_enabled: False
+etherpad_node_environment: production
 etherpad_title: "Etherpad"
 etherpad_favicon: "favicon.ico"
 etherpad_ip: 0.0.0.0
