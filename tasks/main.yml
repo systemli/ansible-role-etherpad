@@ -98,6 +98,7 @@
   become: true
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
+  notify: restart etherpad-lite
 
 - name: ensure ep_hide_referrer patch is applied
   patch:
