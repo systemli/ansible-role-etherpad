@@ -4,6 +4,14 @@ etherpad_required_packages:
   - git
   - procps
   - patch
+etherpad_console_packages:
+  - php-cli
+  - php-curl
+  - php-sqlite3
+etherpad_console_packages_php5:
+  - php5-cli
+  - php5-curl
+  - php5-sqlite
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"
 etherpad_repository_key_file: ""
 etherpad_repository_version: "master"

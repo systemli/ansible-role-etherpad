@@ -17,9 +17,8 @@
 
 - name: ensure required packages are installed
   apt:
-    pkg: "{{ item }}"
+    pkg: "{{ etherpad_required_packages }}"
     state: present
-  with_items: "{{ etherpad_required_packages }}"
 
 - name: ensure etherpad is latest
   git:
