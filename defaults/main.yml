@@ -94,6 +94,7 @@ etherpad_log_appenders:
 #    filename: your-log-file-here.log
 #    maxLogSize: 1024
 #    backups: 3
+etherpad_abiword_enabled: False
 etherpad_console_enabled: False
 etherpad_monit_enabled: False
 # list of etherpad plugins to be installed
@@ -119,4 +120,4 @@ etherpad_dirty_filename: "var/dirty.db"
 etherpad_toc_disable: "true"
 
 # Settings for plugin 'ep_auth_author'
-#etherpad_auth_author_prefix:
+# etherpad_auth_author_prefix:

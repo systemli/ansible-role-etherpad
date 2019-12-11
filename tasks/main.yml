@@ -107,6 +107,9 @@
   when: etherpad_plugins|intersect('ep_hide_referrer')|length > 0
   notify: restart etherpad-lite
 
+- include: abiword.yml
+  when: etherpad_abiword_enabled
+
 - include: console.yml
   when: etherpad_console_enabled
 

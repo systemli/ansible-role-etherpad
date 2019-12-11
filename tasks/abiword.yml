@@ -1,0 +1,13 @@
+---
+
+- name: Ensure abiword package is installed
+  apt:
+    pkg: abiword
+    state: present
+
+- name: Ensure etherpad user is allowed to execute abiword
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^{{ etherpad_user }}'
+    line: '{{ etherpad_user }} ALL = NOPASSWD: {{ etherpad_abiword }}'

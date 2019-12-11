@@ -93,6 +93,7 @@ Defaults:
     #    filename: your-log-file-here.log
     #    maxLogSize: 1024
     #    backups: 3
+    etherpad_abiword_enabled: False
     etherpad_console_enabled: False
     etherpad_monit_enabled: False
     # list of etherpad plugins to be installed
