@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: etherpad
   author: systemli
   description: role to maintain and configure etherpad lite
   company: systemli.org
@@ -12,7 +13,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - trusty
-  categories:
+  galaxy_tags:
     - web
 dependencies:
   - geerlingguy.nodejs

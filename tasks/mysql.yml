@@ -35,9 +35,10 @@
     state: absent
   when: database.changed
 
-- fail:
+- name: Fail if mysql user has no password
+  fail:
     msg: "You need to set a password for mysql user!"
-  when: etherpad_mysql_database_password is undefined or etherpad_mysql_database_password == ""
+  when: etherpad_mysql_database_password is undefined or etherpad_mysql_database_password is empty
 
 - name: ensure mysql user is present
   mysql_user:
