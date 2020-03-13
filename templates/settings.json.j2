@@ -4,6 +4,7 @@
   "favicon": "{{ etherpad_favicon }}",
   "ip": "{{ etherpad_ip }}",
   "port" : {{ etherpad_port }},
+  "showSettingsInAdminPage": {{ etherpad_show_settings_in_admin_page }},
   "sessionKey": "{{ etherpad_session_key }}",
 {% if etherpad_ssl_enabled %}
   "ssl" : {
@@ -50,6 +51,30 @@
     "chatAndUsers": {{ etherpad_pad_options_chat_and_users }},
     "lang": "{{ etherpad_pad_options_lang }}"
   },
+  "padShortcutEnabled" : {
+    "altF9":     {{ etherpad_pad_shortcut_alt_f9 }},
+    "altC":      {{ etherpad_pad_shortcut_alt_c }},
+    "cmdShift2": {{ etherpad_pad_shortcut_cmd_shft_2 }},
+    "delete":    {{ etherpad_pad_shortcut_delete }},
+    "return":    {{ etherpad_pad_shortcut_return }},
+    "esc":       {{ etherpad_pad_shortcut_esc }},
+    "cmdS":      {{ etherpad_pad_shortcut_cmd_s }},
+    "tab":       {{ etherpad_pad_shortcut_tab }},
+    "cmdZ":      {{ etherpad_pad_shortcut_cmd_z }},
+    "cmdY":      {{ etherpad_pad_shortcut_cmd_y }},
+    "cmdI":      {{ etherpad_pad_shortcut_cmd_i }},
+    "cmdB":      {{ etherpad_pad_shortcut_cmd_b }},
+    "cmdU":      {{ etherpad_pad_shortcut_cmd_u }},
+    "cmd5":      {{ etherpad_pad_shortcut_cmd_5 }},
+    "cmdShiftL": {{ etherpad_pad_shortcut_cmd_shift_l }},
+    "cmdShiftN": {{ etherpad_pad_shortcut_cmd_shift_n }},
+    "cmdShift1": {{ etherpad_pad_shortcut_cmd_shift_1 }},
+    "cmdShiftC": {{ etherpad_pad_shortcut_cmd_shift_c }},
+    "cmdH":      {{ etherpad_pad_shortcut_cmd_h }},
+    "ctrlHome":  {{ etherpad_pad_shortcut_ctrl_home }},
+    "pageUp":    {{ etherpad_pad_shortcut_page_up }},
+    "pageDown":  {{ etherpad_pad_shortcut_page_down }}
+  },
   "suppressErrorsInPadText": {{ etherpad_suppress_errors_in_pad_text }},
   "requireSession": {{ etherpad_require_session }},
   "editOnly": {{ etherpad_edit_only }},
@@ -64,6 +89,16 @@
   "requireAuthorization": {{ etherpad_require_authorization }},
   "trustProxy": {{ etherpad_trust_proxy }},
   "disableIPlogging": {{ etherpad_disable_ip_logging }},
+  "automaticReconnectionTimeout": {{ etherpad_automatic_reconnection_timeout }},
+  "scrollWhenFocusLineIsOutOfViewport": {
+    "percentage": {
+      "editionAboveViewport": 0,
+      "editionBelowViewport": 0
+    },
+    "duration": 0,
+    "scrollWhenCaretIsInTheLastLineOfViewport": false,
+    "percentageToScrollWhenUserPressesArrowUp": 0
+  },
 {% if 'ep_table_of_contents' in etherpad_plugins %}
   "ep_toc": {
     "disable_by_default": {{ etherpad_toc_disable }}
@@ -90,6 +125,7 @@
   "loadTest": {{ etherpad_load_test }},
   "indentationOnNewLine": {{ etherpad_indentation_on_new_line }},
   "toolbar": {{ etherpad_toolbar|to_json }},
+  "exposeVersion": {{ etherpad_expose_version }},
   "loglevel": "{{ etherpad_log_level }}",
   "logconfig":
    { "appenders": [
