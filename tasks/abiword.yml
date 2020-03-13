@@ -4,4 +4,3 @@
   apt:
     pkg: abiword
     state: present
-
