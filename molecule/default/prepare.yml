@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  become: True
+  tasks:
+    - name: install acl for ansible
+      apt:
+        pkg: acl
