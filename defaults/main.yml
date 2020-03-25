@@ -3,7 +3,6 @@ etherpad_required_packages:
   - curl
   - git
   - procps
-  - patch
 etherpad_console_packages:
   - php-cli
   - php-curl
