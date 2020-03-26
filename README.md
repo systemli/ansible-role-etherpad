@@ -6,7 +6,8 @@
 
 Role to install & maintain Etherpad Lite.
 
-## Role Variables
+Role Variables
+--------------
 
 The playbook requires special configuration. You must set the `etherpad_api_key`!
 
@@ -25,6 +26,7 @@ Defaults:
     etherpad_console_path: "{{ etherpad_home }}/etherpad-lite-console"
     etherpad_console_purge_delay: 30
     etherpad_console_purge_enabled: False
+    etherpad_console_path_version: "master"
     etherpad_node_environment: production
     etherpad_title: "Etherpad"
     etherpad_favicon: "favicon.ico"
@@ -125,11 +127,13 @@ Defaults:
     # Settings for plugin 'ep_auth_author'
     #etherpad_auth_author_prefix:
 
-## Dependencies
+Dependencies
+---------------
 
  * geerlingguy.nodejs
 
-## Example Playbook
+Example Playbook
+----------------
 
     - hosts: servers
       roles:
@@ -140,19 +144,19 @@ Tests
 
 For developing and testing the role we use Travis CI, Molecule and Vagrant. On the local environment you can easily test the role with
 
-Run local tests with:
-
 ```
-molecule test 
+pip install molecule-vagrant ansible-lint yamllint
+molecule test
 ```
 
-Requires Molecule, Vagrant and `python-vagrant` to be installed.For developing and testing the role we use Travis CI, Molecule and Vagrant. On the local environment you can easily test the role with
+This requires [Vagrant](https://www.vagrantup.com/downloads.html) to be installed.
 
-
-## License
+License
+-------
 
 GPLv3
 
-## Author Information
+Author Information
+------------------
 
 https://www.systemli.org

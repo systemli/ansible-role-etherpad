@@ -17,7 +17,7 @@
   template:
     src: schema.sql.j2
     dest: /tmp/etherpad_schema.sql
-  when: database.changed
+  when: database is changed
 
 - name: ensure mysql database is present
   mysql_db:
@@ -27,13 +27,13 @@
     target: /tmp/etherpad_schema.sql
     login_user: root
     login_password: "{{ etherpad_mysql_root_password|default(omit) }}"
-  when: database.changed
+  when: database is changed
 
 - name: ensure database schema is absent after import
   file:
     path: /tmp/etherpad_schema.sql
     state: absent
-  when: database.changed
+  when: database is changed
 
 - name: Fail if mysql user has no password
   fail:

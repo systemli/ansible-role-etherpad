@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  become: True
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
