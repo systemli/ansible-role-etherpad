@@ -53,7 +53,7 @@
     chdir: "{{ etherpad_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
-  when: repository.changed
+  when: repository is changed
 
 - name: ensure etherpad systemd unit is latest
   template:

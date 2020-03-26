@@ -11,4 +11,7 @@ platforms:
 provisioner:
   name: ansible
   become: true
-lint: yamllint .
+lint: |
+  set -e
+  yamllint .
+  ansible-lint

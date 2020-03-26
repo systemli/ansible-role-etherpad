@@ -6,11 +6,10 @@ env:
   matrix:
     - MOLECULE_DISTRO: debian10
     - MOLECULE_DISTRO: debian9
-    - MOLECULE_DISTRO: debian8
 
 install:
   # Install test dependencies.
-  - pip install molecule docker
+  - pip install molecule docker ansible-lint yamllint
 
 script:
   - molecule test -s docker
