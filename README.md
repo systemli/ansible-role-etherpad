@@ -101,6 +101,7 @@ Defaults:
     etherpad_monit_enabled: False
     # list of etherpad plugins to be installed
     etherpad_plugins: []
+    etherpad_plugins_state: present
     
     # Redis settings
     etherpad_redis_host: localhost

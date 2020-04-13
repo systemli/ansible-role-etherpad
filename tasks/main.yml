@@ -93,7 +93,7 @@
   npm:
     name: "{{ item }}"
     path: "{{ etherpad_path }}"
-    state: present
+    state: "{{ etherpad_plugins_state }}"
   become: true
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
