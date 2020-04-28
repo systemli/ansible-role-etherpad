@@ -26,6 +26,7 @@
     dest: "{{ etherpad_path }}"
     version: "{{ etherpad_repository_version }}"
     key_file: "{{ etherpad_repository_key_file }}"
+    depth: 1
   become: true
   become_user: "{{ etherpad_user }}"
   register: repository
@@ -54,6 +55,7 @@
   become: true
   become_user: "{{ etherpad_user }}"
   when: repository is changed
+  notify: fix package-lock.json  # this is a hack
 
 - name: ensure etherpad systemd unit is latest
   template:

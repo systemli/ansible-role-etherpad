@@ -5,7 +5,6 @@
   roles:
     - role: ansible-role-etherpad
   vars:
-    etherpad_repository_version: 140d5c4b41b186b33a0abc689cf2102fc390476e
-    etherpad_plugins:
-      - ep_hide_referrer
+    etherpad_repository_version: 1.8.3
     nodejs_install_npm_user: root
+    nodejs_version: 10.x

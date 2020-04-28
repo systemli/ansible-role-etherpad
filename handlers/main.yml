@@ -8,3 +8,10 @@
   service:
     name: monit
     state: restarted
+
+- name: fix package-lock.json  # noqa 303
+  command: git checkout src/package-lock.json
+  args:
+    chdir: "{{ etherpad_path }}"
+  become: true
+  become_user: "{{ etherpad_user }}"
