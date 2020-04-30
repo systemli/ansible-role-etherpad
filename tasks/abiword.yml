@@ -2,5 +2,5 @@
 
 - name: Ensure abiword package is installed
   apt:
-    pkg: abiword
+    pkg: "{{ etherpad_abiword_packages }}"
     state: present

@@ -86,9 +86,9 @@ etherpad_edit_only: "false"
 etherpad_session_no_password: "false"
 etherpad_minify: "true"
 etherpad_max_age: 21600
-etherpad_abiword: "null"
+etherpad_abiword: "{{ '\"/usr/bin/abiword\"' if etherpad_abiword_enabled else 'null' }}"
 etherpad_soffice: "null"
-etherpad_tidyhtml: "null"
+etherpad_tidyhtml: "{{ '\"/usr/bin/tidy\"' if etherpad_abiword_enabled else 'null' }}"
 etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
@@ -120,6 +120,9 @@ etherpad_log_appenders:
 #    maxLogSize: 1024
 #    backups: 3
 etherpad_abiword_enabled: False
+etherpad_abiword_packages:
+  - abiword
+  - tidy
 etherpad_console_enabled: False
 etherpad_monit_enabled: False
 # list of etherpad plugins to be installed
