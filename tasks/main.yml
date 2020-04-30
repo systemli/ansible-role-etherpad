@@ -29,7 +29,7 @@
     depth: 1
   become: true
   become_user: "{{ etherpad_user }}"
-  register: repository
+  notify: ensure etherpad dependencies are latest
 
 - name: ensure etherpad config is latest
   template:
@@ -47,15 +47,6 @@
 
 - include: mysql.yml
   when: etherpad_db_type == "mysql"
-
-- name: ensure etherpad dependencies are latest
-  command: bin/installDeps.sh
-  args:
-    chdir: "{{ etherpad_path }}"
-  become: true
-  become_user: "{{ etherpad_user }}"
-  when: repository is changed
-  notify: fix package-lock.json  # this is a hack
 
 - name: ensure etherpad systemd unit is latest
   template:
@@ -90,6 +81,9 @@
   become: true
   become_user: "{{ etherpad_user }}"
   notify: restart etherpad-lite
+
+- name: flush handlers
+  meta: flush_handlers
 
 - name: install etherpad plugins
   npm:
