@@ -36,7 +36,7 @@ etherpad_ssl_key: "/path-to-your/epl-server.key"
 etherpad_ssl_cert: "/path-to-your/epl-server.crt"
 etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
 etherpad_ssl_ca_intermediate_cert2: "/path-to-your/epl-intermediate-cert2.crt"
-etherpad_skin_name: "no-skin"
+etherpad_skin_name: "colibris"
 etherpad_db_type: dirty
 etherpad_users: []
 #  -
@@ -84,7 +84,7 @@ etherpad_suppress_errors_in_pad_text: "false"
 etherpad_require_session: "false"
 etherpad_edit_only: "false"
 etherpad_session_no_password: "false"
-etherpad_minify: "true"
+etherpad_minify: "false"
 etherpad_max_age: 21600
 etherpad_abiword: "{{ '\"/usr/bin/abiword\"' if etherpad_abiword_enabled else 'null' }}"
 etherpad_soffice: "null"
