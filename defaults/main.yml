@@ -86,7 +86,7 @@ etherpad_edit_only: "false"
 etherpad_session_no_password: "false"
 etherpad_minify: "false"
 etherpad_max_age: 21600
-etherpad_abiword: "null"
+etherpad_abiword: "{{ '\"/usr/bin/abiword\"' if etherpad_abiword_enabled else 'null' }}"
 etherpad_soffice: "null"
 etherpad_tidyhtml: "null"
 etherpad_allow_unknown_file_ends: "true"
