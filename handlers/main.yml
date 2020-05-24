@@ -15,11 +15,4 @@
     chdir: "{{ etherpad_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: fix package-lock.json  # this is a hack
-
-- name: fix package-lock.json  # noqa 303
-  command: git checkout src/package-lock.json
-  args:
-    chdir: "{{ etherpad_path }}"
-  become: true
-  become_user: "{{ etherpad_user }}"
+  notify: restart etherpad-lite
