@@ -109,6 +109,9 @@
     "prefix": "{{ etherpad_auth_author_prefix }}"
   },
 {% endif %}
+{% if 'ep_markdown' in etherpad_plugins %}
+  "ep_markdown_default": true,
+{% endif %}
   "users": {
 {% for user in etherpad_users %}
     "{% if user.auth_author is defined and user.auth_author %}{{ etherpad_auth_author_prefix }}{% endif %}{{ user.name }}": {
