@@ -97,6 +97,8 @@ etherpad_socket_transport_protocols: ["xhr-polling", "jsonp-polling", "htmlfile"
 etherpad_load_test: "false"
 etherpad_indentation_on_new_line: "false"
 etherpad_automatic_reconnection_timeout: 0
+etherpad_commit_rate_limiting_duration: 1
+etherpad_commit_rate_limiting_points: 10
 etherpad_expose_version: "false"
 etherpad_toolbar:
   left:

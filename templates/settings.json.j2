@@ -99,6 +99,10 @@
     "scrollWhenCaretIsInTheLastLineOfViewport": false,
     "percentageToScrollWhenUserPressesArrowUp": 0
   },
+  "commitRateLimiting": {
+    "duration": {{ etherpad_commit_rate_limiting_duration }},
+    "points": {{ etherpad_commit_rate_limiting_points }}
+  },
 {% if 'ep_table_of_contents' in etherpad_plugins %}
   "ep_toc": {
     "disable_by_default": {{ etherpad_toc_disable }}
