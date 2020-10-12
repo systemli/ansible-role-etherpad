@@ -15,6 +15,16 @@
     shell: "/bin/bash"
     state: present
 
+- name: ensure ssh key file are latest
+  copy:
+    src: "{{ etherpad_repository_key_file_src }}"
+    dest: "{{ etherpad_repository_key_file }}"
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_user }}"
+    mode: "0600"
+  when:
+    - etherpad_repository_key_file_src|length > 0
+
 - name: ensure required packages are installed
   apt:
     pkg: "{{ etherpad_required_packages }}"

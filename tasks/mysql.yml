@@ -16,6 +16,7 @@
   template:
     src: schema.sql.j2
     dest: /tmp/etherpad_schema.sql
+    mode: 0755
   when: database is changed
 
 - name: ensure mysql database is present

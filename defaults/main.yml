@@ -12,6 +12,7 @@ etherpad_console_packages_php5:
   - php5-curl
   - php5-sqlite
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"
+etherpad_repository_key_file_src: ""
 etherpad_repository_key_file: ""
 etherpad_repository_version: "master"
 etherpad_user: "etherpad"
