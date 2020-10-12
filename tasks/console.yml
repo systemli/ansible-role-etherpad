@@ -13,6 +13,11 @@
   become: true
   become_user: "{{ etherpad_user }}"
 
+- name: Run composer install
+  composer:
+    command: install
+    working_dir: "{{ etherpad_console_path }}"
+
 - name: ensure purge cronjob file is latest
   template:
     src: cron.d/etherpad-lite-console.j2
