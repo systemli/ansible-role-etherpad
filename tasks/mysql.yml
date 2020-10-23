@@ -1,7 +1,7 @@
 ---
-- name: ensure python-mysqldb is installed
+- name: ensure python mysql package is installed
   apt:
-    pkg: python-mysqldb
+    pkg: "{{ etherpad_python_mysql_package }}"
     state: present
 
 - name: ensure mysql database is present

@@ -152,3 +152,9 @@ etherpad_toc_disable: "true"
 
 # Settings for plugin 'ep_auth_author'
 # etherpad_auth_author_prefix:
+
+# Change to "python3-pymysql" on python3
+etherpad_python_mysql_package: "python-mysqldb"
+
+# Change to "/usr/bin/node" on Ubuntu 20.04
+etherpad_node_path: "/usr/bin/nodejs"
