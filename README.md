@@ -1,7 +1,7 @@
 # ansible-role-etherpad
 
 
-[![Build Status](https://travis-ci.org/systemli/ansible-role-etherpad.svg?branch=master)](https://travis-ci.org/systemli/ansible-role-etherpad)
+[![Build Status](https://github.com/systemli/ansible-role-etherpad/workflows/Molecule/badge.svg?branch=master)](https://github.com/systemli/ansible-role-etherpad/actions?query=workflow%3AMolecule)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
 Role to install & maintain Etherpad Lite.
