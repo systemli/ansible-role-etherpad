@@ -20,7 +20,7 @@
 
 - name: ensure purge cronjob file is latest
   template:
-    src: cron.d/etherpad-lite-console.j2
+    src: etc/cron.d/etherpad-lite-console.j2
     dest: /etc/cron.d/etherpad-lite-console
     owner: root
     group: root
