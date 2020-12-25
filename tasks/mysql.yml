@@ -46,3 +46,36 @@
     password: "{{ etherpad_mysql_database_password }}"
     priv: "{{ etherpad_mysql_database_user }}.*:ALL"
     login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: register systemd version number
+  shell: |
+    set -o pipefail
+    systemd --version | head -1 | cut -d' ' -f2
+  args:
+    executable: /bin/bash
+  check_mode: False
+  changed_when: False
+  register: systemd_version
+  when:
+    - etherpad_mysql_systemd_dropin_enabled
+
+- name: create directory for etherpads systemd drop-in
+  file:
+    path: /etc/systemd/system/etherpad-lite.service.d/
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+  when:
+    - etherpad_mysql_systemd_dropin_enabled
+
+- name: create directory for etherpads systemd drop-in
+  template:
+    src: etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf.j2
+    dest: /etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload systemd
+  when:
+    - etherpad_mysql_systemd_dropin_enabled

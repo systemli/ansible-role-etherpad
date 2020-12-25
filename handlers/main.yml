@@ -24,3 +24,8 @@
   become: true
   become_user: "{{ etherpad_user }}"
   notify: restart etherpad-lite
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true
+  become: true

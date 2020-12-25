@@ -1,0 +1,18 @@
+# This is managed by ansible
+#
+# It has the purpose to automatically restart the etherpad.lite service on failure.
+# It will restart the service for X times set in StartLimitBurst,
+# with an interval which is set in StartLimitInterval and RestartSec
+# This is especially helpful during mariadb updates.
+
+[Service]
+Restart={{ etherpad_mysql_systemd_dropin_service_restart }}
+RestartSec={{ etherpad_mysql_systemd_dropin_service_restartsec }}
+
+[Unit]
+{% if systemd_version.stdout|int >= 232 %}
+StartLimitIntervalSec={{ etherpad_mysql_systemd_dropin_unit_startlimitinterval }}
+{% else %}
+StartLimitInterval={{ etherpad_mysql_systemd_dropin_unit_startlimitinterval }}
+{% endif %}
+StartLimitBurst={{ etherpad_mysql_systemd_dropin_unit_startlimitburst }}

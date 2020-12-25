@@ -145,6 +145,13 @@ etherpad_mysql_database_engine: InnoDB
 etherpad_mysql_database_collation: utf8mb4_bin
 etherpad_mysql_database_charset: utf8mb4
 
+# Values for systemd dropin, to ensure service is restarted for 10 minutes every minute
+etherpad_mysql_systemd_dropin_enabled: False
+etherpad_mysql_systemd_dropin_service_restart: "always"
+etherpad_mysql_systemd_dropin_service_restartsec: "60"
+etherpad_mysql_systemd_dropin_unit_startlimitinterval: "60"   # in seconds
+etherpad_mysql_systemd_dropin_unit_startlimitburst: "10"
+
 etherpad_dirty_filename: "var/dirty.db"
 
 # Settings for plugin 'ep_table_of_contents'
