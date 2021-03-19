@@ -93,7 +93,9 @@
   become: true
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
-  notify: restart etherpad-lite
+  notify:
+    - ensure etherpad dependencies are latest
+    - restart etherpad-lite
 
 - include: abiword.yml
   when: etherpad_abiword_enabled
