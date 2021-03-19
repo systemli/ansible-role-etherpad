@@ -86,7 +86,6 @@ etherpad_pad_shortcut_page_down: "true"
 etherpad_suppress_errors_in_pad_text: "false"
 etherpad_require_session: "false"
 etherpad_edit_only: "false"
-etherpad_session_no_password: "false"
 etherpad_minify: "true"
 etherpad_max_age: 21600
 etherpad_abiword: "{{ '\"/usr/bin/abiword\"' if etherpad_abiword_enabled else 'null' }}"
