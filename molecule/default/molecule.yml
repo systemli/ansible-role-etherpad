@@ -6,6 +6,8 @@ driver:
 platforms:
   - name: buster64
     box: debian/buster64
+    instance_raw_config_args:
+      - "vm.network 'forwarded_port', guest: 9001, host: 9001"
   - name: stretch64
     box: debian/stretch64
 provisioner:
