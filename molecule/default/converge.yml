@@ -7,4 +7,4 @@
   vars:
     etherpad_repository_version: 1.8.13
     nodejs_install_npm_user: root
-    nodejs_version: 10.x
+    nodejs_version: 14.x
