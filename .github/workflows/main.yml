@@ -20,7 +20,6 @@ jobs:
           - debian9
           - ubuntu2004
           - ubuntu1804
-          - ubuntu1604
 
     steps:
       - name: Check out the codebase.
