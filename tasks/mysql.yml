@@ -1,7 +1,7 @@
 ---
-- name: ensure python-mysqldb is installed
+- name: ensure python3-mysqldb is installed
   apt:
-    pkg: python-mysqldb
+    pkg: python3-mysqldb
     state: present
 
 - name: ensure mysql database is present
