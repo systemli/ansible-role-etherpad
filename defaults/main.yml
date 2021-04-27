@@ -3,16 +3,6 @@ etherpad_required_packages:
   - curl
   - git
   - procps
-etherpad_console_packages:
-  - php-cli
-  - php-curl
-  - php-sqlite3
-  - composer
-etherpad_console_packages_php5:
-  - php5-cli
-  - php5-curl
-  - php5-sqlite
-  - composer
 etherpad_repository: "https://github.com/ether/etherpad-lite.git"
 etherpad_repository_key_file_src: ""
 etherpad_repository_key_file: ""
@@ -21,13 +11,6 @@ etherpad_user: "etherpad"
 etherpad_group: "{{ etherpad_user }}"
 etherpad_home: "/home/etherpad"
 etherpad_path: "{{ etherpad_home }}/etherpad-lite"
-etherpad_console_path: "{{ etherpad_home }}/etherpad-lite-console"
-etherpad_console_path_version: "master"
-etherpad_console_purge_jobs:
-  - "--days=1 --suffix=-temp"
-  - "--days=365 --suffix=-keep"
-  - "--days=30 --ignore-suffix=-keep --ignore-suffix=-temp"
-etherpad_console_purge_enabled: False
 etherpad_node_environment: production
 etherpad_title: "Etherpad"
 etherpad_favicon: "favicon.ico"
@@ -124,8 +107,6 @@ etherpad_log_appenders:
 #    maxLogSize: 1024
 #    backups: 3
 etherpad_abiword_enabled: False
-etherpad_console_enabled: False
-etherpad_monit_enabled: False
 # list of etherpad plugins to be installed
 etherpad_plugins: []
 etherpad_plugins_state: present

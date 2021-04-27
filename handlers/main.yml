@@ -4,11 +4,6 @@
     name: etherpad-lite
     state: restarted
 
-- name: restart monit
-  service:
-    name: monit
-    state: restarted
-
 - name: ensure etherpad dependencies are latest
   command: bin/installDeps.sh
   args:
