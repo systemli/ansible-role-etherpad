@@ -1,8 +1,0 @@
-# /etc/cron.d/etherpad-lite-console: Purge old etherpad pads
-
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
-
-{% for job in etherpad_console_purge_jobs %}
-4 {{ loop.index0 }} * * *       {{ etherpad_user }}    {{ etherpad_console_path }}/bin/console pad:purge --apikey={{ etherpad_api_key }} {{ job }}
-{% endfor %}

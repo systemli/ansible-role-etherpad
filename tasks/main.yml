@@ -99,9 +99,3 @@
 
 - include: abiword.yml
   when: etherpad_abiword_enabled
-
-- include: console.yml
-  when: etherpad_console_enabled
-
-- include: monit.yml
-  when: etherpad_monit_enabled
