@@ -4,12 +4,12 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: buster64
-    box: debian/buster64
+  - name: bullseye64
+    box: debian/bullseye64
     instance_raw_config_args:
       - "vm.network 'forwarded_port', guest: 9001, host: 9001"
-  - name: stretch64
-    box: debian/stretch64
+  - name: buster64
+    box: debian/buster64
 provisioner:
   name: ansible
   become: true

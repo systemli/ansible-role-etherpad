@@ -3,6 +3,10 @@
   hosts: all
   become: True
   tasks:
+    - name: Run the equivalent of "apt-get update" before installing packages
+      apt:
+        update_cache: yes
+
     - name: install acl for ansible
       apt:
         pkg: acl
