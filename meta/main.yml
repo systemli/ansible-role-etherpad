@@ -9,11 +9,11 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - bullseye
         - buster
-        - stretch
     - name: Ubuntu
       versions:
-        - xenial
+        - focal
         - bionic
   galaxy_tags:
     - web

@@ -25,17 +25,20 @@ Example Playbook
       roles:
          - { role: systemli.etherpad }
 
+Testing & Development
+---------------------
+
 Tests
 -----
+For developing and testing the role we use Github Actions, Molecule, and Vagrant. On the local environment you can easily test the role with
 
-For developing and testing the role we use Travis CI, Molecule and Vagrant. On the local environment you can easily test the role with
+Run local tests with:
 
 ```
-pip install molecule-vagrant ansible-lint yamllint
 molecule test
 ```
 
-This requires [Vagrant](https://www.vagrantup.com/downloads.html) to be installed.
+Requires Molecule, Vagrant and `python-vagrant` to be installed.
 
 License
 -------
