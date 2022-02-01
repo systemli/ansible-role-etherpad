@@ -143,5 +143,4 @@ etherpad_toc_disable: "true"
 # Change to "python-pymysql" on python2 systems
 etherpad_python_mysql_package: "python3-mysqldb"
 
-# Change to "/usr/bin/node" on Ubuntu 20.04
-etherpad_node_path: "/usr/bin/nodejs"
+etherpad_node_path: "/usr/bin/node"
