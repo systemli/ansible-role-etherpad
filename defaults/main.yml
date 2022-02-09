@@ -155,6 +155,10 @@ etherpad_delete_after_delay_loopdelay: 3600
 etherpad_delete_after_delay_deleteatstart: true
 etherpad_delete_after_delay_text: "The content of this pad has been deleted since it was older than the configured delay."
 
+# Settings for plugin ep_headerauth
+etherpad_headerauth_username_header: x-authenticated-user
+etherpad_headerauth_displayname_header: x-authenticated-name
+
 # Change to "python-pymysql" on python2 systems
 etherpad_python_mysql_package: "python3-mysqldb"
 

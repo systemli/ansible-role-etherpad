@@ -9,6 +9,10 @@ Role to install, configure & maintain Etherpad Lite. You can use this role to co
 
 Currently only MySQL allows to create the user and database. For PostgreSQL those operations should be done by your own (If you want or need to automate those tasks, you can probably use this role : geerlingguy.postgresql).
 
+This playbook also allows to install some plugins for Etherpad :
+  - ep_delete_after_delay (To delete some inactive pad after a delay)
+  - ep_headerauth (To authenticate users through the HTTP header - Eg usefull when using an SSO portal like LemonLDAP::NG)
+
 Role Variables
 --------------
 
@@ -24,6 +28,13 @@ This variable allows to define what kind of backend storage we want to use for E
     etherpad_postgres_database_port: 5432
     etherpad_postgres_database_ssl_policy: "disabled"
 Those variables allow to configure Etherpad with PostgreSQL. To be able to use them, you must set the variable `etherpad_db_type` to `postgres`.
+
+    etherpad_plugins
+List of plugins we want to add to our Etherpad instance.
+
+    etherpad_headerauth_username_header: x-authenticated-user
+    etherpad_headerauth_displayname_header: x-authenticated-name
+Configuration values for the [ep_headerauth](https://www.npmjs.com/package/ep_headerauth) plugin (authentication with http header). If you want to use this plugin, `etherpad_trust_proxy` and `etherpad_require_authentication` must be set to True.
 
 For more information about available variables (and their default values) : see `defaults/main.yml`
 
