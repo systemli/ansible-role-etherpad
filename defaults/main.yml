@@ -140,6 +140,13 @@ etherpad_toc_disable: "true"
 # Settings for plugin 'ep_auth_author'
 # etherpad_auth_author_prefix:
 
+# Settings for plugin 'ep_delete_after_delay'
+etherpad_delete_after_delay: 86400
+etherpad_delete_after_delay_loop: true
+etherpad_delete_after_delay_loopdelay: 3600
+etherpad_delete_after_delay_deleteatstart: true
+etherpad_delete_after_delay_text: "The content of this pad has been deleted since it was older than the configured delay."
+
 # Change to "python-pymysql" on python2 systems
 etherpad_python_mysql_package: "python3-mysqldb"
 

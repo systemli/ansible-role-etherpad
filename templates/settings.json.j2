@@ -112,6 +112,15 @@
     "prefix": "{{ etherpad_auth_author_prefix }}"
   },
 {% endif %}
+{% if 'ep_delete_after_delay' in etherpad_plugins %}
+  "ep_delete_after_delay": {
+    "delay": {{ etherpad_delete_after_delay }},
+    "loop": {{ etherpad_delete_after_delay_loop|string|lower }},
+    "loopDelay": {{ etherpad_delete_after_delay_loopdelay }},
+    "deleteAtStart": {{ etherpad_delete_after_delay_deleteatstart|string|lower }},
+    "text": "{{ etherpad_delete_after_delay_text }}"
+  },
+{% endif %}
   "users": {
 {% for user in etherpad_users %}
     "{% if user.auth_author is defined and user.auth_author %}{{ etherpad_auth_author_prefix }}{% endif %}{{ user.name }}": {
