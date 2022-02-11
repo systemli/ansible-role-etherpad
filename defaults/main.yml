@@ -125,6 +125,14 @@ etherpad_mysql_database_engine: InnoDB
 etherpad_mysql_database_collation: utf8mb4_bin
 etherpad_mysql_database_charset: utf8mb4
 
+# PostgreSQL configuration
+etherpad_postgres_database_host: localhost
+etherpad_postgres_database_name: etherpad
+etherpad_postgres_database_user: etherpad
+etherpad_postgres_database_password:
+etherpad_postgres_database_port: 5432
+etherpad_postgres_database_ssl_policy: "disabled"
+
 # Values for systemd dropin, to ensure service is restarted for 10 minutes every minute
 etherpad_mysql_systemd_dropin_enabled: False
 etherpad_mysql_systemd_dropin_service_restart: "always"

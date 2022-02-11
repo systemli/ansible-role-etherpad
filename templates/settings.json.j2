@@ -30,6 +30,22 @@
     "charset" : "{{ etherpad_mysql_database_charset }}"
   },
 {% endif %}
+{% if etherpad_db_type == "postgres" %}
+  "dbSettings" : {
+    "user"    : "{{ etherpad_postgres_database_user }}",
+    "host"    : "{{ etherpad_postgres_database_host }}",
+    "port"    : {{ etherpad_postgres_database_port }},
+    "password": "{{ etherpad_postgres_database_password }}",
+    "database": "{{ etherpad_postgres_database_name }}",
+    {% if etherpad_postgres_database_ssl_policy == "enforce" %}
+    "ssl": true
+    {% elif etherpad_postgres_database_ssl_policy == "permissive" %}
+    "ssl": { "rejectUnauthorized": false }
+    {% else %}
+    "ssl": false
+    {% endif %}
+  },
+{% endif %}
 {% if etherpad_db_type == "redis" %}
   "dbSettings" : {
     "host"    : "{{ etherpad_redis_host }}",
