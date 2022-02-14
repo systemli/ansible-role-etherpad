@@ -137,6 +137,12 @@
     "text": "{{ etherpad_delete_after_delay_text }}"
   },
 {% endif %}
+{% if 'ep_headerauth' in etherpad_plugins %}
+  "ep_headerauth": {
+    "username_header": "{{ etherpad_headerauth_username_header }}",
+    "displayname_header": "{{ etherpad_headerauth_displayname_header }}"
+  },
+{% endif %}
   "users": {
 {% for user in etherpad_users %}
     "{% if user.auth_author is defined and user.auth_author %}{{ etherpad_auth_author_prefix }}{% endif %}{{ user.name }}": {
