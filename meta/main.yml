@@ -5,7 +5,7 @@ galaxy_info:
   description: role to maintain and configure etherpad lite
   company: systemli.org
   license: GPLv3
-  min_ansible_version: 2.3
+  min_ansible_version: "2.3"
   platforms:
     - name: Debian
       versions:
@@ -18,4 +18,4 @@ galaxy_info:
   galaxy_tags:
     - web
 dependencies:
-  - geerlingguy.nodejs
+  - role: geerlingguy.nodejs
