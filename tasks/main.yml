@@ -90,6 +90,7 @@
     name: "{{ item }}"
     path: "{{ etherpad_path }}"
     state: "{{ etherpad_plugins_state }}"
+    registry: https://github.com
   become: true
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
