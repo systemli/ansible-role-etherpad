@@ -22,5 +22,3 @@ jobs:
       distros: '[ "debian11", "debian10", "ubuntu2004", "ubuntu1804" ]'
       role-dependencies: |
         - src: geerlingguy.nodejs
-    secrets:
-      galaxy-token: ${{ secrets.galaxy_api_key }}
