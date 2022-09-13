@@ -169,5 +169,8 @@
     {{ appender|to_json }}
 {% endfor %}
       ]
-   }
+  },
+  "socketIo": {
+    "maxHttpBufferSize": {{ etherpad_socket_max_http_buffer_size |default(10000) }}
+  },
 }
