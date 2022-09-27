@@ -1,4 +1,7 @@
 ---
+exclude_paths:
+  - molecule/
+  - .github/
 skip_list:
   - fqcn-builtins
   - no-handler
