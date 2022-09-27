@@ -1,10 +1,10 @@
 ---
-- name: ensure python mysqldb is installed
+- name: Ensure python mysqldb is installed
   apt:
     pkg: "{{ etherpad_python_mysql_package }}"
     state: present
 
-- name: ensure mysql database is present
+- name: Ensure mysql database is present
   mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
@@ -12,14 +12,14 @@
     login_unix_socket: /run/mysqld/mysqld.sock
   register: database
 
-- name: ensure mysql schema is present
+- name: Ensure mysql schema is present
   template:
     src: schema.sql.j2
     dest: /tmp/etherpad_schema.sql
     mode: 0755
   when: database is changed
 
-- name: ensure mysql database is present
+- name: Ensure mysql database is present
   mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
@@ -28,7 +28,7 @@
     login_unix_socket: /run/mysqld/mysqld.sock
   when: database is changed
 
-- name: ensure database schema is absent after import
+- name: Ensure database schema is absent after import
   file:
     path: /tmp/etherpad_schema.sql
     state: absent
@@ -39,7 +39,7 @@
     msg: "You need to set a password for mysql user!"
   when: etherpad_mysql_database_password is undefined or etherpad_mysql_database_password|length == 0
 
-- name: ensure mysql user is present
+- name: Ensure mysql user is present
   mysql_user:
     name: "{{ etherpad_mysql_database_user }}"
     state: present
@@ -47,7 +47,7 @@
     priv: "{{ etherpad_mysql_database_user }}.*:ALL"
     login_unix_socket: /run/mysqld/mysqld.sock
 
-- name: register systemd version number
+- name: Register systemd version number
   shell: |
     set -o pipefail
     systemd --version | head -1 | cut -d' ' -f2
@@ -59,7 +59,7 @@
   when:
     - etherpad_mysql_systemd_dropin_enabled
 
-- name: create directory for etherpads systemd drop-in
+- name: Create directory for etherpads systemd drop-in
   file:
     path: /etc/systemd/system/etherpad-lite.service.d/
     state: directory
@@ -69,13 +69,13 @@
   when:
     - etherpad_mysql_systemd_dropin_enabled
 
-- name: create directory for etherpads systemd drop-in
+- name: Create directory for etherpads systemd drop-in
   template:
     src: etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf.j2
     dest: /etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf
     owner: root
     group: root
     mode: 0644
-  notify: reload systemd
+  notify: Reload systemd
   when:
     - etherpad_mysql_systemd_dropin_enabled

@@ -1,5 +1,5 @@
 ---
-- name: allow overcommiting of memory
+- name: Allow overcommiting of memory
   sysctl:
     name: vm.overcommit_memory
     value: "1"
@@ -7,7 +7,7 @@
     sysctl_file: /etc/sysctl.d/90-ansible-vm.conf
     sysctl_set: yes
 
-- name: ensure redis module for nodejs is present
+- name: Ensure redis module for nodejs is present
   npm:
     name: redis
     path: "{{ etherpad_path }}"

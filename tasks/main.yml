@@ -1,6 +1,6 @@
 ---
 
-- name: ensure apt_preferences include file for deb.nodesource.com is present
+- name: Ensure apt_preferences include file for deb.nodesource.com is present
   copy:
     src: apt/preferences.d/deb.nodesource.com.pref
     dest: /etc/apt/preferences.d/deb.nodesource.com.pref
@@ -8,14 +8,14 @@
     owner: root
     group: root
 
-- name: ensure etherpad user is present
+- name: Ensure etherpad user is present
   user:
     name: "{{ etherpad_user }}"
     home: "{{ etherpad_home }}"
     shell: "/bin/bash"
     state: present
 
-- name: ensure ssh key file are latest
+- name: Ensure ssh key file are latest
   copy:
     src: "{{ etherpad_repository_key_file_src }}"
     dest: "{{ etherpad_repository_key_file }}"
@@ -25,12 +25,12 @@
   when:
     - etherpad_repository_key_file_src|length > 0
 
-- name: ensure required packages are installed
+- name: Ensure required packages are installed
   apt:
     pkg: "{{ etherpad_required_packages }}"
     state: present
 
-- name: ensure etherpad is latest
+- name: Ensure etherpad is latest
   git:
     repo: "{{ etherpad_repository }}"
     dest: "{{ etherpad_path }}"
@@ -39,9 +39,9 @@
     depth: 1
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: ensure etherpad dependencies are latest
+  notify: Ensure etherpad dependencies are latest
 
-- name: ensure etherpad config is latest
+- name: Ensure etherpad config is latest
   template:
     src: settings.json.j2
     dest: "{{ etherpad_path }}/settings.json"
@@ -50,7 +50,7 @@
     mode: 0644
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: restart etherpad-lite
+  notify: Restart etherpad-lite
 
 - include: redis.yml
   when: etherpad_db_type == "redis"
@@ -58,7 +58,7 @@
 - include: mysql.yml
   when: etherpad_db_type == "mysql"
 
-- name: ensure etherpad systemd unit is latest
+- name: Ensure etherpad systemd unit is latest
   template:
     src: etc/systemd/system/etherpad-lite.service.j2
     dest: /etc/systemd/system/etherpad-lite.service
@@ -66,12 +66,12 @@
     group: root
     mode: 0644
 
-- name: ensure etherpad will start after system is booted
+- name: Ensure etherpad will start after system is booted
   service:
     name: etherpad-lite
     enabled: yes
 
-- name: ensure etherpad api key is latest
+- name: Ensure etherpad api key is latest
   template:
     src: APIKEY.txt.j2
     dest: "{{ etherpad_path }}/APIKEY.txt"
@@ -80,12 +80,12 @@
     mode: 0640
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: restart etherpad-lite
+  notify: Restart etherpad-lite
 
 - name: flush handlers
   meta: flush_handlers
 
-- name: install etherpad plugins
+- name: Install etherpad plugins
   npm:
     name: "{{ item }}"
     path: "{{ etherpad_path }}"
@@ -95,10 +95,10 @@
   become_user: "{{ etherpad_user }}"
   with_items: "{{ etherpad_plugins|d() }}"
   notify:
-    - ensure etherpad dependencies are latest
-    - restart etherpad-lite
+    - Ensure etherpad dependencies are latest
+    - Restart etherpad-lite
 
-- name: copy custom logo file if configured
+- name: Copy custom logo file if configured
   copy:
     src: "{{ etherpad_custom_logo_src }}"
     dest: "{{ etherpad_path }}/src/static/"
