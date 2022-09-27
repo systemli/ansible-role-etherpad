@@ -163,4 +163,8 @@ etherpad_headerauth_displayname_header: x-authenticated-name
 # Change to "python-pymysql" on python2 systems
 etherpad_python_mysql_package: "python3-mysqldb"
 
+# Copy a custom logo file to src/static/
+#etherpad_custom_logo_src: 
+
 etherpad_node_path: "/usr/bin/node"
+

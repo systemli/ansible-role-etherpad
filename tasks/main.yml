@@ -98,5 +98,14 @@
     - ensure etherpad dependencies are latest
     - restart etherpad-lite
 
+- name: copy custom logo file if configured
+  copy:
+    src: "{{ etherpad_custom_logo_src }}"
+    dest: "{{ etherpad_path }}/src/static/"
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_group }}"
+    mode: 0644
+  when: etherpad_custom_logo_src
+
 - include: abiword.yml
   when: etherpad_abiword_enabled
