@@ -44,7 +44,7 @@
     name: "{{ etherpad_mysql_database_user }}"
     state: present
     password: "{{ etherpad_mysql_database_password }}"
-    priv: "{{ etherpad_mysql_database_user }}.*:ALL"
+    priv: "{{ etherpad_mysql_database_name }}.*:ALL"
     login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: Register systemd version number
