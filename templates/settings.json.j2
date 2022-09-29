@@ -54,7 +54,7 @@
     "database": {{ etherpad_redis_database }},
   },
 {% endif %}
-  "defaultPadText": {{ etherpad_default_text }},
+  "defaultPadText": "{{ etherpad_default_text }}",
   "padOptions": {
     "noColors": {{ etherpad_pad_options_no_colors }},
     "showControls": {{ etherpad_pad_options_show_controls }},
