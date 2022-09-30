@@ -105,7 +105,7 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: 0644
-  when: etherpad_custom_logo_src
+  when: etherpad_custom_logo_src is defined
 
 - include: abiword.yml
   when: etherpad_abiword_enabled
