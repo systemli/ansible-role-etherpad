@@ -23,7 +23,7 @@
     group: "{{ etherpad_user }}"
     mode: "0600"
   when:
-    - etherpad_repository_key_file_src|length > 0
+    - etherpad_repository_key_file_src | length > 0
 
 - name: Ensure required packages are installed
   apt:
@@ -82,7 +82,7 @@
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
 
-- name: flush handlers
+- name: Flush handlers
   meta: flush_handlers
 
 - name: Install etherpad plugins
@@ -93,7 +93,7 @@
     registry: https://github.com
   become: true
   become_user: "{{ etherpad_user }}"
-  with_items: "{{ etherpad_plugins|d() }}"
+  with_items: "{{ etherpad_plugins | default() }}"
   notify:
     - Ensure etherpad dependencies are latest
     - Restart etherpad-lite

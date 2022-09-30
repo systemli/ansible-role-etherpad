@@ -167,4 +167,3 @@ etherpad_python_mysql_package: "python3-mysqldb"
 #etherpad_custom_logo_src: 
 
 etherpad_node_path: "/usr/bin/node"
-
