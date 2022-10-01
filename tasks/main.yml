@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure apt_preferences include file for deb.nodesource.com is present
   copy:
     src: apt/preferences.d/deb.nodesource.com.pref
@@ -105,7 +104,7 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: 0644
-  when: etherpad_custom_logo_src
+  when: etherpad_custom_logo_src is defined
 
 - include: abiword.yml
   when: etherpad_abiword_enabled
