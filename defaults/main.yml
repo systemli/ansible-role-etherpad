@@ -86,6 +86,7 @@ etherpad_automatic_reconnection_timeout: 0
 etherpad_commit_rate_limiting_duration: 1
 etherpad_commit_rate_limiting_points: 10
 etherpad_expose_version: "false"
+etherpad_socket_max_http_buffer_size: 10000
 etherpad_toolbar:
   left:
     - ["bold", "italic", "underline", "strikethrough"]
