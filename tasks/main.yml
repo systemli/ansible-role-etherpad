@@ -46,7 +46,7 @@
     dest: "{{ etherpad_path }}/settings.json"
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
-    mode: 0644
+    mode: 0640
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
