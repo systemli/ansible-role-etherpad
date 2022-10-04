@@ -50,6 +50,7 @@
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
+  no_log: true
 
 - include: redis.yml
   when: etherpad_db_type == "redis"
@@ -80,6 +81,7 @@
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
+  no_log: true
 
 - name: Flush handlers
   meta: flush_handlers
