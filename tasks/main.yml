@@ -52,10 +52,12 @@
   notify: Restart etherpad-lite
   no_log: true
 
-- include: redis.yml
+- name: Import redis tasks
+  import_tasks: redis.yml
   when: etherpad_db_type == "redis"
 
-- include: mysql.yml
+- name: Import mysql tasks
+  import_tasks: mysql.yml
   when: etherpad_db_type == "mysql"
 
 - name: Ensure etherpad systemd unit is latest
@@ -108,5 +110,6 @@
     mode: 0644
   when: etherpad_custom_logo_src is defined
 
-- include: abiword.yml
+- name: Import abiword tasks
+  import_tasks: abiword.yml
   when: etherpad_abiword_enabled
