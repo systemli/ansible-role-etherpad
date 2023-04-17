@@ -89,7 +89,7 @@
   meta: flush_handlers
 
 - name: Install etherpad plugins
-  npm:
+  community.general.npm:
     name: "{{ item }}"
     path: "{{ etherpad_path }}"
     state: "{{ etherpad_plugins_state }}"
