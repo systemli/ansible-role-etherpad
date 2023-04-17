@@ -4,17 +4,17 @@
     name: etherpad-lite
     state: restarted
 
-- name: Ensure etherpad dependencies are latest
-  command: bin/installDeps.sh
-  args:
+- name: Ensure etherpad dependencies are latest  # noqa no-changed-when
+  command:
+    cmd: bin/installDeps.sh
     chdir: "{{ etherpad_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Fix package-lock.json # this is a hack
 
-- name: Fix package-lock.json # noqa 303
-  command: git checkout src/package-lock.json
-  args:
+- name: Fix package-lock.json # noqa command-instead-of-module no-changed-when
+  command:
+    cmd: git checkout src/package-lock.json
     chdir: "{{ etherpad_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
