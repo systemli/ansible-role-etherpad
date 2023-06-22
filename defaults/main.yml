@@ -79,6 +79,9 @@ etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
 etherpad_trust_proxy: "false"
+etherpad_cookie_same_site: "Lax"
+etherpad_cookie_session_lifetime: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
+etherpad_cookie_session_refresh_interval: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_socket_transport_protocols: ["xhr-polling", "jsonp-polling", "htmlfile"]
 etherpad_load_test: "false"
 etherpad_indentation_on_new_line: "false"
@@ -87,6 +90,12 @@ etherpad_commit_rate_limiting_duration: 1
 etherpad_commit_rate_limiting_points: 10
 etherpad_expose_version: "false"
 etherpad_socket_max_http_buffer_size: 10000
+etherpad_dump_on_unclean_exit: "false"
+etherpad_import_export_rate_limiting_window_ms: 90000
+etherpad_import_export_rate_limiting_max: 10
+etherpad_import_max_file_size: 52428800 # 50 * 1024 * 1024
+etherpad_custom_locale_strings: {}
+etherpad_enable_admin_ui_tests: "false"
 etherpad_toolbar:
   left:
     - ["bold", "italic", "underline", "strikethrough"]
@@ -165,6 +174,6 @@ etherpad_headerauth_displayname_header: x-authenticated-name
 etherpad_python_mysql_package: "python3-mysqldb"
 
 # Copy a custom logo file to src/static/
-#etherpad_custom_logo_src: 
+#etherpad_custom_logo_src:
 
 etherpad_node_path: "/usr/bin/node"
