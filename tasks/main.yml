@@ -14,6 +14,16 @@
     shell: "/bin/bash"
     state: present
 
+- name: Ensure ssh directory is present
+  ansible.builtin.file:
+    owner: "{{ etherpad_user }}"
+    group: "{{ etherpad_user }}"
+    mode: '0700'
+    path: "{{ etherpad_repository_key_file | dirname }}"
+    state: directory
+  when:
+    - etherpad_repository_key_file | length > 0
+
 - name: Ensure ssh key file are latest
   copy:
     src: "{{ etherpad_repository_key_file_src }}"
