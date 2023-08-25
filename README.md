@@ -1,20 +1,18 @@
 # ansible-role-etherpad
 
-
 [![Build Status](https://github.com/systemli/ansible-role-etherpad/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-role-etherpad/actions?query=workflow%3AIntegration)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-etherpad-blue.svg)](https://galaxy.ansible.com/systemli/etherpad/)
 
 Role to install, configure & maintain Etherpad Lite. You can use this role to configure Etherpad with those storage solutions : MySQL (or MariaDB), Redis and PostgreSQL.
 
-
 Currently only MySQL allows to create the user and database. For PostgreSQL those operations should be done by your own (If you want or need to automate those tasks, you can probably use this role : geerlingguy.postgresql).
 
 This playbook also allows to install some plugins for Etherpad :
-  - ep_delete_after_delay (To delete some inactive pad after a delay)
-  - ep_headerauth (To authenticate users through the HTTP header - Eg usefull when using an SSO portal like LemonLDAP::NG)
 
-Role Variables
---------------
+- ep_delete_after_delay (To delete some inactive pad after a delay)
+- ep_headerauth (To authenticate users through the HTTP header - Eg usefull when using an SSO portal like LemonLDAP::NG)
+
+## Role Variables
 
 The playbook requires special configuration. You must set the `etherpad_api_key`!
 
@@ -38,40 +36,30 @@ Configuration values for the [ep_headerauth](https://www.npmjs.com/package/ep_he
 
 For more information about available variables (and their default values) : see `defaults/main.yml`
 
-Dependencies
----------------
-
- * geerlingguy.nodejs
-
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: servers
       roles:
          - { role: systemli.etherpad }
 
-Testing & Development
----------------------
+## Testing & Development
 
-Tests
------
+### Tests
+
 For developing and testing the role we use Github Actions, Molecule, and Vagrant. On the local environment you can easily test the role with
 
 Run local tests with:
 
-```
-molecule test
-```
+    ```bash
+    molecule test
+    ```
 
 Requires Molecule, Vagrant and `python-vagrant` to be installed.
 
-
-License
--------
+## License
 
 GPLv3
 
-Author Information
-------------------
+## Author Information
 
-https://www.systemli.org
+<https://www.systemli.org>

@@ -1,0 +1,28 @@
+---
+- name: Assert that Etherpad API Key is set
+  ansible.builtin.assert:
+    that:
+      - etherpad_api_key is defined
+    fail_msg: "Etherpad API Key is not set"
+    success_msg: "Etherpad API Key is set"
+
+- name: Check NodeJS is installed
+  ansible.builtin.shell: node --version | sed 's/^.//'
+  changed_when: false
+  check_mode: no
+  register: node_version
+  ignore_errors: true
+
+- name: Assert that NodeJS is installed
+  ansible.builtin.assert:
+    that:
+      - node_version.rc == 0
+    fail_msg: "NodeJS is not installed"
+    success_msg: "NodeJS is installed"
+
+- name: Assert that NodeJS version is supported
+  ansible.builtin.assert:
+    that:
+      - node_version.stdout is version(etherpad_min_node_version, '>=')
+    fail_msg: "NodeJS version {{ node_version.stdout }} is not supported. Minimum required version is {{ etherpad_min_node_version }}"
+    success_msg: "NodeJS version {{ node_version.stdout }} is supported"
