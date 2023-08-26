@@ -13,9 +13,8 @@ galaxy_info:
         - bullseye
     - name: Ubuntu
       versions:
+        - jammy
         - focal
-        - bionic
   galaxy_tags:
     - web
-dependencies:
-  - role: geerlingguy.nodejs
+    - etherpad
