@@ -44,6 +44,19 @@
   register: etherpad_repository
   notify: Restart etherpad-lite
 
+- name: Install dependencies # noqa no-handler
+  ansible.builtin.shell: |
+    bin/installDeps.sh
+  args:
+    chdir: "{{ etherpad_path }}"
+    executable: /bin/bash
+  environment:
+    ETHERPAD_PRODUCTION: "true"
+  changed_when: false
+  become: true
+  become_user: "{{ etherpad_user }}"
+  when: etherpad_repository.changed
+
 - name: Copy configuration file
   ansible.builtin.template:
     src: settings.json.j2
@@ -80,35 +93,6 @@
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
   no_log: true
-
-- name: Install etherpad plugins # noqa no-changed-when
-  community.general.npm:
-    name: "{{ item.name }}"
-    path: "{{ etherpad_path }}"
-    state: "{{ item.state | default('present') }}"
-    version: "{{ item.version | default(omit) }}"
-    registry: "{{ item.registry | default(omit) }}"
-    production: true
-    no_optional: true
-    ignore_scripts: true
-  become: true
-  become_user: "{{ etherpad_user }}"
-  loop: "{{ etherpad_plugins }}"
-  register: etherpad_plugin
-  when: etherpad_plugins | length > 0
-  notify: Restart etherpad-lite
-
-- name: Install dependencies # noqa no-changed-when
-  ansible.builtin.shell: |
-    bin/installDeps.sh
-  args:
-    chdir: "{{ etherpad_path }}"
-    executable: /bin/bash
-  environment:
-    ETHERPAD_PRODUCTION: "true"
-  become: true
-  become_user: "{{ etherpad_user }}"
-  when: etherpad_repository.changed or etherpad_plugin.changed
 
 - name: Copy custom logo file if configured
   ansible.builtin.copy:

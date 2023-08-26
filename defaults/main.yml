@@ -118,8 +118,6 @@ etherpad_log_appenders:
 #    maxLogSize: 1024
 #    backups: 3
 etherpad_abiword_enabled: False
-# List of plugins to install. Format is: { name: "ep_plugin_name", version: "0.0.0" }
-etherpad_plugins: []
 
 etherpad_redis_host: localhost
 etherpad_redis_port: 6379
@@ -151,6 +149,9 @@ etherpad_mysql_systemd_dropin_unit_startlimitinterval: "60" # in seconds
 etherpad_mysql_systemd_dropin_unit_startlimitburst: "10"
 
 etherpad_dirty_filename: "var/dirty.db"
+
+# List of installed plugins. Will not install plugin, just indicate for settings
+etherpad_plugins: []
 
 # Settings for plugin 'ep_table_of_contents'
 etherpad_toc_disable: "true"

@@ -6,6 +6,4 @@
     - role: ansible-role-etherpad
   vars:
     etherpad_repository_version: 1.9.2
-    etherpad_plugins:
-      - { name: ep_comments_page }
     etherpad_api_key: "secure_api_key"
