@@ -2,40 +2,38 @@
 - name: Preflight checks
   ansible.builtin.import_tasks: preflight.yml
 
-- name: Ensure etherpad user is present
-  user:
+- name: Create user
+  ansible.builtin.user:
     name: "{{ etherpad_user }}"
     home: "{{ etherpad_home }}"
     shell: "/bin/bash"
     state: present
 
-- name: Ensure ssh directory is present
+- name: Create ssh directory
   ansible.builtin.file:
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_user }}"
     mode: "0700"
     path: "{{ etherpad_repository_key_file | dirname }}"
     state: directory
-  when:
-    - etherpad_repository_key_file | length > 0
+  when: etherpad_repository_key_file | length > 0
 
-- name: Ensure ssh key file are latest
-  copy:
+- name: Create ssh key file
+  ansible.builtin.copy:
     src: "{{ etherpad_repository_key_file_src }}"
     dest: "{{ etherpad_repository_key_file }}"
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_user }}"
     mode: "0600"
-  when:
-    - etherpad_repository_key_file_src | length > 0
+  when: etherpad_repository_key_file_src | length > 0
 
-- name: Ensure required packages are installed
-  apt:
+- name: Install required packages
+  ansible.builtin.apt:
     pkg: "{{ etherpad_required_packages }}"
     state: present
 
-- name: Ensure etherpad is latest
-  git:
+- name: Clone etherpad repository
+  ansible.builtin.git:
     repo: "{{ etherpad_repository }}"
     dest: "{{ etherpad_path }}"
     version: "{{ etherpad_repository_version }}"
@@ -46,38 +44,38 @@
   register: etherpad_repository
   notify: Restart etherpad-lite
 
-- name: Ensure etherpad config is latest
-  template:
+- name: Copy configuration file
+  ansible.builtin.template:
     src: settings.json.j2
     dest: "{{ etherpad_path }}/settings.json"
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
-    mode: 0640
+    mode: "0640"
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
   no_log: true
 
 - name: Import mysql tasks
-  import_tasks: mysql.yml
+  ansible.builtin.import_tasks: mysql.yml
   when: etherpad_db_type == "mysql"
 
-- name: Ensure etherpad systemd unit is latest
-  template:
+- name: Copy systemd service file
+  ansible.builtin.template:
     src: etc/systemd/system/etherpad-lite.service.j2
     dest: /etc/systemd/system/etherpad-lite.service
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Reload systemd
 
-- name: Ensure etherpad api key is latest
-  template:
+- name: Set api key
+  ansible.builtin.template:
     src: APIKEY.txt.j2
     dest: "{{ etherpad_path }}/APIKEY.txt"
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
-    mode: 0640
+    mode: "0640"
   become: true
   become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
@@ -113,20 +111,20 @@
   when: etherpad_repository.changed or etherpad_plugin.changed
 
 - name: Copy custom logo file if configured
-  copy:
+  ansible.builtin.copy:
     src: "{{ etherpad_custom_logo_src }}"
     dest: "{{ etherpad_path }}/src/static/"
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
-    mode: 0644
+    mode: "0644"
   when: etherpad_custom_logo_src is defined
 
 - name: Import abiword tasks
-  import_tasks: abiword.yml
+  ansible.builtin.import_tasks: abiword.yml
   when: etherpad_abiword_enabled
 
-- name: Ensure etherpad will start after system is booted
-  service:
+- name: Activate and start etherpad-lite
+  ansible.builtin.service:
     name: etherpad-lite
     state: started
     enabled: yes
