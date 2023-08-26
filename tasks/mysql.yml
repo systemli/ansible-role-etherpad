@@ -1,10 +1,10 @@
 ---
-- name: Ensure python mysqldb is installed
-  apt:
+- name: Install python mysqldb package
+  ansible.builtin.apt:
     pkg: "{{ etherpad_python_mysql_package }}"
     state: present
 
-- name: Ensure mysql database is present
+- name: Create mysql database
   community.mysql.mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
@@ -12,14 +12,14 @@
     login_unix_socket: /run/mysqld/mysqld.sock
   register: database
 
-- name: Ensure mysql schema is present
-  template:
+- name: Copy mysqldb schema # noqa no-handler
+  ansible.builtin.template:
     src: schema.sql.j2
     dest: /tmp/etherpad_schema.sql
     mode: 0755
   when: database is changed
 
-- name: Ensure mysql database is present
+- name: Import mysqldb schema # noqa no-handler
   community.mysql.mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
@@ -28,18 +28,18 @@
     login_unix_socket: /run/mysqld/mysqld.sock
   when: database is changed
 
-- name: Ensure database schema is absent after import
-  file:
+- name: Remove mysqldb schema file # noqa no-handler
+  ansible.builtin.file:
     path: /tmp/etherpad_schema.sql
     state: absent
   when: database is changed
 
 - name: Fail if mysql user has no password
-  fail:
+  ansible.builtin.fail:
     msg: "You need to set a password for mysql user!"
   when: etherpad_mysql_database_password is undefined or etherpad_mysql_database_password | length == 0
 
-- name: Ensure mysql user is present
+- name: Create mysql user
   community.mysql.mysql_user:
     name: "{{ etherpad_mysql_database_user }}"
     state: present
@@ -48,34 +48,31 @@
     login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: Register systemd version number
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     systemd --version | head -1 | cut -d' ' -f2
   args:
     executable: /bin/bash
-  check_mode: False
-  changed_when: False
+  check_mode: no
+  changed_when: false
   register: systemd_version
-  when:
-    - etherpad_mysql_systemd_dropin_enabled
+  when: etherpad_mysql_systemd_dropin_enabled
 
 - name: Create directory for etherpads systemd drop-in
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/etherpad-lite.service.d/
     state: directory
     owner: root
     group: root
-    mode: 0750
-  when:
-    - etherpad_mysql_systemd_dropin_enabled
+    mode: "0750"
+  when: etherpad_mysql_systemd_dropin_enabled
 
-- name: Create directory for etherpads systemd drop-in
-  template:
+- name: Create systemd drop-in for etherpad
+  ansible.builtin.template:
     src: etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf.j2
     dest: /etc/systemd/system/etherpad-lite.service.d/10-start-limit.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Reload systemd
-  when:
-    - etherpad_mysql_systemd_dropin_enabled
+  when: etherpad_mysql_systemd_dropin_enabled
