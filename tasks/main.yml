@@ -58,10 +58,6 @@
   notify: Restart etherpad-lite
   no_log: true
 
-- name: Import redis tasks
-  import_tasks: redis.yml
-  when: etherpad_db_type == "redis"
-
 - name: Import mysql tasks
   import_tasks: mysql.yml
   when: etherpad_db_type == "mysql"
