@@ -13,7 +13,7 @@
   ansible.builtin.file:
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_user }}"
-    mode: '0700'
+    mode: "0700"
     path: "{{ etherpad_repository_key_file | dirname }}"
     state: directory
   when:
@@ -43,7 +43,8 @@
     depth: 1
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: Ensure etherpad dependencies are latest
+  register: etherpad_repository
+  notify: Restart etherpad-lite
 
 - name: Ensure etherpad config is latest
   template:
@@ -72,11 +73,7 @@
     owner: root
     group: root
     mode: 0644
-
-- name: Ensure etherpad will start after system is booted
-  service:
-    name: etherpad-lite
-    enabled: yes
+  notify: Reload systemd
 
 - name: Ensure etherpad api key is latest
   template:
@@ -90,21 +87,29 @@
   notify: Restart etherpad-lite
   no_log: true
 
-- name: Flush handlers
-  meta: flush_handlers
-
-- name: Install etherpad plugins
+- name: Install etherpad plugins # noqa no-changed-when
   community.general.npm:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
     path: "{{ etherpad_path }}"
-    state: "{{ etherpad_plugins_state }}"
-    registry: https://github.com
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    registry: "{{ item.registry | default(omit) }}"
   become: true
   become_user: "{{ etherpad_user }}"
-  with_items: "{{ etherpad_plugins | default() }}"
-  notify:
-    - Ensure etherpad dependencies are latest
-    - Restart etherpad-lite
+  loop: "{{ etherpad_plugins }}"
+  register: etherpad_plugins
+  when: etherpad_plugins | length > 0
+  notify: Restart etherpad-lite
+
+- name: Install dependencies # noqa no-changed-when
+  ansible.builtin.shell: |
+    bin/installDeps.sh
+  args:
+    chdir: "{{ etherpad_path }}"
+    executable: /bin/bash
+  become: true
+  become_user: "{{ etherpad_user }}"
+  when: etherpad_repository.changed or etherpad_plugins.changed
 
 - name: Copy custom logo file if configured
   copy:
@@ -118,3 +123,9 @@
 - name: Import abiword tasks
   import_tasks: abiword.yml
   when: etherpad_abiword_enabled
+
+- name: Ensure etherpad will start after system is booted
+  service:
+    name: etherpad-lite
+    state: started
+    enabled: yes
