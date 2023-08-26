@@ -33,7 +33,7 @@ etherpad_users: []
 etherpad_api_key: ""
 etherpad_session_key: "Y7sc5qSXw5aEBIDGsjfkyLJDV"
 etherpad_disable_ip_logging: "true"
-etherpad_default_text: '"Welcome to Etherpad!\\n\\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\\n\\nGet involved with Etherpad at http:\\/\\/etherpad.org\\n"'
+etherpad_default_text: "Welcome to Etherpad!\\n\\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\\n\\nGet involved with Etherpad at http:\\/\\/etherpad.org\\n"
 etherpad_pad_options_no_colors: "false"
 etherpad_pad_options_show_controls: "true"
 etherpad_pad_options_show_chat: "true"
@@ -72,7 +72,7 @@ etherpad_require_session: "false"
 etherpad_edit_only: "false"
 etherpad_minify: "true"
 etherpad_max_age: 21600
-etherpad_abiword: "{{ '\"/usr/bin/abiword\"' if etherpad_abiword_enabled else 'null' }}"
+etherpad_abiword: "{{ '/usr/bin/abiword' if etherpad_abiword_enabled else 'null' }}"
 etherpad_soffice: "null"
 etherpad_tidyhtml: "null"
 etherpad_allow_unknown_file_ends: "true"
@@ -82,7 +82,8 @@ etherpad_trust_proxy: "false"
 etherpad_cookie_same_site: "Lax"
 etherpad_cookie_session_lifetime: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_cookie_session_refresh_interval: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
-etherpad_socket_transport_protocols: ["xhr-polling", "jsonp-polling", "htmlfile"]
+etherpad_socket_transport_protocols:
+  ["xhr-polling", "jsonp-polling", "htmlfile"]
 etherpad_load_test: "false"
 etherpad_indentation_on_new_line: "false"
 etherpad_automatic_reconnection_timeout: 0
@@ -110,17 +111,15 @@ etherpad_toolbar:
     - ["timeslider_export", "timeslider_returnToPad"]
 etherpad_log_level: "INFO"
 etherpad_log_appenders:
-  -
-    type: console
+  - type: console
 #  -
 #    type: file
 #    filename: your-log-file-here.log
 #    maxLogSize: 1024
 #    backups: 3
 etherpad_abiword_enabled: False
-# list of etherpad plugins to be installed
+# List of plugins to install. Format is: { name: "ep_plugin_name", version: "0.0.0" }
 etherpad_plugins: []
-etherpad_plugins_state: present
 
 etherpad_redis_host: localhost
 etherpad_redis_port: 6379
@@ -148,7 +147,7 @@ etherpad_postgres_database_ssl_policy: "disabled"
 etherpad_mysql_systemd_dropin_enabled: False
 etherpad_mysql_systemd_dropin_service_restart: "always"
 etherpad_mysql_systemd_dropin_service_restartsec: "60"
-etherpad_mysql_systemd_dropin_unit_startlimitinterval: "60"   # in seconds
+etherpad_mysql_systemd_dropin_unit_startlimitinterval: "60" # in seconds
 etherpad_mysql_systemd_dropin_unit_startlimitburst: "10"
 
 etherpad_dirty_filename: "var/dirty.db"

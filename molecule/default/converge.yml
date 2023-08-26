@@ -3,10 +3,9 @@
   hosts: all
   become: yes
   roles:
-    - role: geerlingguy.nodejs
     - role: ansible-role-etherpad
   vars:
-    etherpad_repository_version: 1.8.13
+    etherpad_repository_version: 1.9.2
+    etherpad_plugins:
+      - { name: ep_comments_page }
     etherpad_api_key: "secure_api_key"
-    nodejs_version: 18.x
-    nodejs_install_npm_user: "root"
