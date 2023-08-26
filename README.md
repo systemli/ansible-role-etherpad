@@ -27,9 +27,6 @@ This variable allows to define what kind of backend storage we want to use for E
     etherpad_postgres_database_ssl_policy: "disabled"
 Those variables allow to configure Etherpad with PostgreSQL. To be able to use them, you must set the variable `etherpad_db_type` to `postgres`.
 
-    etherpad_plugins
-List of plugins we want to add to our Etherpad instance.
-
     etherpad_headerauth_username_header: x-authenticated-user
     etherpad_headerauth_displayname_header: x-authenticated-name
 Configuration values for the [ep_headerauth](https://www.npmjs.com/package/ep_headerauth) plugin (authentication with http header). If you want to use this plugin, `etherpad_trust_proxy` and `etherpad_require_authentication` must be set to True.
