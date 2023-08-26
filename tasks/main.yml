@@ -81,24 +81,21 @@
   notify: Restart etherpad-lite
   no_log: true
 
+# Installation of etherpad plugins needs to be done with --no-save and --legacy-peer-deps.
+# Furthermore this will corrupt the node_modules directory, so we need to reinstall the dependencies.
 - name: Install etherpad plugins # noqa no-changed-when
-  community.general.npm:
-    name: "{{ item.name }}"
-    path: "{{ etherpad_path }}"
-    state: "{{ item.state | default('present') }}"
-    version: "{{ item.version | default(omit) }}"
-    registry: "{{ item.registry | default(omit) }}"
-    production: true
-    no_optional: true
-    ignore_scripts: true
+  ansible.builtin.shell: |
+    npm install --no-save --legacy-peer-deps {{ item.name }}@{{ item.version | default('latest') }} {{ item.registry | default('') }}
+  args:
+    chdir: "{{ etherpad_path }}"
+    executable: /bin/bash
   become: true
   become_user: "{{ etherpad_user }}"
   loop: "{{ etherpad_plugins }}"
-  register: etherpad_plugin
+  changed_when: false
   when: etherpad_plugins | length > 0
-  notify: Restart etherpad-lite
 
-- name: Install dependencies # noqa no-changed-when
+- name: Install dependencies
   ansible.builtin.shell: |
     bin/installDeps.sh
   args:
@@ -106,9 +103,9 @@
     executable: /bin/bash
   environment:
     ETHERPAD_PRODUCTION: "true"
+  changed_when: false
   become: true
   become_user: "{{ etherpad_user }}"
-  when: etherpad_repository.changed or etherpad_plugin.changed
 
 - name: Copy custom logo file if configured
   ansible.builtin.copy:
