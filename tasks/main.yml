@@ -94,10 +94,13 @@
     state: "{{ item.state | default('present') }}"
     version: "{{ item.version | default(omit) }}"
     registry: "{{ item.registry | default(omit) }}"
+    production: true
+    no_optional: true
+    ignore_scripts: true
   become: true
   become_user: "{{ etherpad_user }}"
   loop: "{{ etherpad_plugins }}"
-  register: etherpad_plugins
+  register: etherpad_plugin
   when: etherpad_plugins | length > 0
   notify: Restart etherpad-lite
 
@@ -109,7 +112,7 @@
     executable: /bin/bash
   become: true
   become_user: "{{ etherpad_user }}"
-  when: etherpad_repository.changed or etherpad_plugins.changed
+  when: etherpad_repository.changed or etherpad_plugin.changed
 
 - name: Copy custom logo file if configured
   copy:
