@@ -7,3 +7,4 @@
   vars:
     etherpad_repository_version: 1.9.2
     etherpad_api_key: "secure_api_key"
+    etherpad_abiword_enabled: true

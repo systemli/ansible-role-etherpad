@@ -17,7 +17,7 @@ etherpad_favicon: "favicon.ico"
 etherpad_ip: 0.0.0.0
 etherpad_port: 9001
 etherpad_show_settings_in_admin_page: "true"
-etherpad_ssl_enabled: False
+etherpad_ssl_enabled: false
 etherpad_ssl_key: "/path-to-your/epl-server.key"
 etherpad_ssl_cert: "/path-to-your/epl-server.crt"
 etherpad_ssl_ca_intermediate_cert1: "/path-to-your/epl-intermediate-cert1.crt"
@@ -117,7 +117,7 @@ etherpad_log_appenders:
 #    filename: your-log-file-here.log
 #    maxLogSize: 1024
 #    backups: 3
-etherpad_abiword_enabled: False
+etherpad_abiword_enabled: false
 
 etherpad_redis_host: localhost
 etherpad_redis_port: 6379
@@ -142,7 +142,7 @@ etherpad_postgres_database_port: 5432
 etherpad_postgres_database_ssl_policy: "disabled"
 
 # Values for systemd dropin, to ensure service is restarted for 10 minutes every minute
-etherpad_mysql_systemd_dropin_enabled: False
+etherpad_mysql_systemd_dropin_enabled: false
 etherpad_mysql_systemd_dropin_service_restart: "always"
 etherpad_mysql_systemd_dropin_service_restartsec: "60"
 etherpad_mysql_systemd_dropin_unit_startlimitinterval: "60" # in seconds

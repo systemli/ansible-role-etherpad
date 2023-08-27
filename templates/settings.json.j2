@@ -97,7 +97,7 @@
   "editOnly": {{ etherpad_edit_only }},
   "minify": {{ etherpad_minify }},
   "maxAge": {{ etherpad_max_age }},
-  "abiword": {{ etherpad_abiword }},
+  "abiword": {{ etherpad_abiword | to_json }},
   "soffice": {{ etherpad_soffice }},
   "tidyHtml": {{ etherpad_tidyhtml }},
   "allowUnknownFileEnds": {{ etherpad_allow_unknown_file_ends }},
