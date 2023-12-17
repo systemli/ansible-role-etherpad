@@ -99,7 +99,6 @@
   "maxAge": {{ etherpad_max_age }},
   "abiword": {{ etherpad_abiword | to_json }},
   "soffice": {{ etherpad_soffice }},
-  "tidyHtml": {{ etherpad_tidyhtml }},
   "allowUnknownFileEnds": {{ etherpad_allow_unknown_file_ends }},
   "requireAuthentication": {{ etherpad_require_authentication }},
   "requireAuthorization": {{ etherpad_require_authorization }},
@@ -167,14 +166,6 @@
   "toolbar": {{ etherpad_toolbar|to_json }},
   "exposeVersion": {{ etherpad_expose_version }},
   "loglevel": "{{ etherpad_log_level }}",
-  "logconfig":
-   { "appenders": [
-{% for appender in etherpad_log_appenders %}
-    {% if not loop.first %},{% endif %}
-    {{ appender|to_json }}
-{% endfor %}
-      ]
-  },
   "socketIo": {
     "maxHttpBufferSize": {{ etherpad_socket_max_http_buffer_size }}
   },
