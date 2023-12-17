@@ -74,7 +74,6 @@ etherpad_minify: "true"
 etherpad_max_age: 21600
 etherpad_abiword: "{{ '/usr/bin/abiword' if etherpad_abiword_enabled else 'null' }}"
 etherpad_soffice: "null"
-etherpad_tidyhtml: "null"
 etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
@@ -110,13 +109,6 @@ etherpad_toolbar:
   timeslider:
     - ["timeslider_export", "timeslider_returnToPad"]
 etherpad_log_level: "INFO"
-etherpad_log_appenders:
-  - type: console
-#  -
-#    type: file
-#    filename: your-log-file-here.log
-#    maxLogSize: 1024
-#    backups: 3
 etherpad_abiword_enabled: false
 
 etherpad_redis_host: localhost
