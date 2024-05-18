@@ -13,8 +13,8 @@ galaxy_info:
         - bullseye
     - name: Ubuntu
       versions:
+        - noble
         - jammy
-        - focal
   galaxy_tags:
     - web
     - etherpad
