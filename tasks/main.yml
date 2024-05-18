@@ -44,19 +44,6 @@
   register: etherpad_repository
   notify: Restart etherpad-lite
 
-- name: Install dependencies # noqa no-handler
-  ansible.builtin.shell: |
-    bin/installDeps.sh
-  args:
-    chdir: "{{ etherpad_path }}"
-    executable: /bin/bash
-  environment:
-    ETHERPAD_PRODUCTION: "true"
-  changed_when: false
-  become: true
-  become_user: "{{ etherpad_user }}"
-  when: etherpad_repository.changed
-
 - name: Copy configuration file
   ansible.builtin.template:
     src: settings.json.j2

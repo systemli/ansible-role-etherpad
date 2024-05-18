@@ -7,7 +7,8 @@ Type=simple
 User={{ etherpad_user }}
 Group={{ etherpad_group }}
 WorkingDirectory={{ etherpad_path }}
-ExecStart={{ etherpad_node_path }} {{ etherpad_path }}/node_modules/ep_etherpad-lite/node/server.js
+ExecStart={{ etherpad_path }}/bin/run.sh
+Environment=PATH={{ etherpad_environment_path }}
 Environment=NODE_ENV={{ etherpad_node_environment }}
 Restart=always
 

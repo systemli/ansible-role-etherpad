@@ -176,5 +176,20 @@
   },
   "importMaxFileSize": {{ etherpad_import_max_file_size }},
   "customLocaleStrings": {{ etherpad_custom_locale_strings|to_json }},
-  "enableAdminUITests": {{ etherpad_enable_admin_ui_tests }}
+  "enableAdminUITests": {{ etherpad_enable_admin_ui_tests }},
+  "authenticationMethod": {{ etherpad_authentication_method }},
+  "lowerCasePadIds": {{ etherpad_lower_case_pad_ids }},
+  {% if etherpad_authentication_method == "sso" %}
+  "sso": {
+    "issuer": "{{ etherpad_sso_issuer }}",
+    "clients": {{ etherpad_sso_clients|to_json }},
+  },
+  {% endif %}
+  "ttl": {
+    "AccessToken": "{{ etherpad_ttl_access_token }}",
+    "AuthorizationCode": "{{ etherpad_ttl_authorization_code }}",
+    "ClientCredentials": "{{ etherpad_ttl_client_credentials }}",
+    "IdToken": "{{ etherpad_ttl_id_token }}",
+    "RefreshToken": "{{ etherpad_ttl_refresh_token }}"
+  }
 }
