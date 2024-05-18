@@ -15,5 +15,7 @@
       ansible.builtin.include_role:
         name: geerlingguy.nodejs
       vars:
-        nodejs_version: 18.x
+        nodejs_version: 20.x
         nodejs_install_npm_user: "root"
+        nodejs_npm_global_packages:
+          - name: pnpm

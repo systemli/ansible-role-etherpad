@@ -6,6 +6,14 @@
     fail_msg: "Etherpad API Key is not set"
     success_msg: "Etherpad API Key is set"
 
+- name: Assert that Etherpad SSO Config is set properly
+  ansible.builtin.assert:
+    that:
+      - etherpad_sso_clients | length > 0
+    fail_msg: "Etherpad SSO Config is not set properly"
+    success_msg: "Etherpad SSO Config looks good"
+  when: etherpad_authentication_method == "sso"
+
 - name: Check NodeJS is installed
   ansible.builtin.shell: node --version | sed 's/^.//'
   changed_when: false
@@ -26,3 +34,19 @@
       - node_version.stdout is version(etherpad_min_node_version, '>=')
     fail_msg: "NodeJS version {{ node_version.stdout }} is not supported. Minimum required version is {{ etherpad_min_node_version }}"
     success_msg: "NodeJS version {{ node_version.stdout }} is supported"
+
+- name: Check pnpm is installed
+  ansible.builtin.command: pnpm --version
+  changed_when: false
+  check_mode: no
+  register: pnpm_version
+  ignore_errors: true
+  environment:
+    PATH: "{{ etherpad_environment_path }}"
+
+- name: Assert that pnpm is installed
+  ansible.builtin.assert:
+    that:
+      - pnpm_version.rc == 0
+    fail_msg: "pnpm is not installed"
+    success_msg: "pnpm is installed"
