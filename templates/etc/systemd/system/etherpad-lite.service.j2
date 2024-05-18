@@ -11,6 +11,7 @@ ExecStart={{ etherpad_path }}/bin/run.sh
 Environment=PATH={{ etherpad_environment_path }}
 Environment=NODE_ENV={{ etherpad_node_environment }}
 Restart=always
+SyslogIdentifier=etherpad
 
 [Install]
 WantedBy=multi-user.target
