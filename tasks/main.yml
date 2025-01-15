@@ -41,8 +41,7 @@
     depth: 1
   become: true
   become_user: "{{ etherpad_user }}"
-  register: etherpad_repository
-  notify: Restart etherpad-lite
+  notify: Build etherpad-lite
 
 - name: Copy configuration file
   ansible.builtin.template:
