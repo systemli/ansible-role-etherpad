@@ -50,8 +50,6 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: "0640"
-  become: true
-  become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
   no_log: true
 
@@ -75,8 +73,6 @@
     owner: "{{ etherpad_user }}"
     group: "{{ etherpad_group }}"
     mode: "0640"
-  become: true
-  become_user: "{{ etherpad_user }}"
   notify: Restart etherpad-lite
   no_log: true
 
