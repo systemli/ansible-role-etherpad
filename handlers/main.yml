@@ -7,7 +7,7 @@
     executable: /bin/bash
     chdir: "{{ etherpad_path }}"
   environment:
-    NODE_ENV: "development"
+    NODE_ENV: "{{ etherpad_node_environment }}"
     PATH: "{{ etherpad_environment_path }}"
   become: true
   become_user: "{{ etherpad_user }}"
