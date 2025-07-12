@@ -104,11 +104,11 @@ etherpad_sso_clients: []
 #   grant_types: ["authorization_code"]
 #   response_types: ["code"]
 #   redirect_uris: ["http://localhost:9001/admin"]
-etherpad_ttl_access_token: 3600
-etherpad_ttl_authorization_code: 600
-etherpad_ttl_client_credentials: 3600
-etherpad_ttl_id_token: 3600
-etherpad_ttl_refresh_token: 86400
+etherpad_sso_ttl_access_token: 3600
+etherpad_sso_ttl_authorization_code: 600
+etherpad_sso_ttl_client_credentials: 3600
+etherpad_sso_ttl_id_token: 3600
+etherpad_sso_ttl_refresh_token: 86400
 etherpad_toolbar:
   left:
     - ["bold", "italic", "underline", "strikethrough"]
