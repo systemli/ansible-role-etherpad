@@ -179,7 +179,6 @@
   "enableAdminUITests": {{ etherpad_enable_admin_ui_tests }},
   "authenticationMethod": {{ etherpad_authentication_method|to_json }},
   "lowerCasePadIds": {{ etherpad_lower_case_pad_ids }},
-  {% if etherpad_authentication_method == "sso" %}
   "sso": {
     "issuer": "{{ etherpad_sso_issuer }}",
     "clients": {{ etherpad_sso_clients|to_json }},
@@ -191,5 +190,4 @@
       "RefreshToken": {{ etherpad_sso_ttl_refresh_token }}
     }
   }
-  {% endif %}
 }
