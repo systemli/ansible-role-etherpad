@@ -39,9 +39,10 @@
     version: "{{ etherpad_repository_version }}"
     key_file: "{{ etherpad_repository_key_file }}"
     depth: 1
+    force: false
   become: true
   become_user: "{{ etherpad_user }}"
-  notify: Build etherpad-lite
+  notify: "Build etherpad-lite"
 
 - name: Copy configuration file
   ansible.builtin.template:
