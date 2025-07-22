@@ -10,6 +10,8 @@
     PATH: "{{ etherpad_environment_path }}"
   check_mode: false
   changed_when: true
+  become: true
+  become_user: "{{ etherpad_user }}"
   listen: "Build etherpad-lite"
 
 - name: Build etherpad-lite with respect to the node environment
