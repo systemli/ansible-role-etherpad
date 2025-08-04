@@ -17,6 +17,10 @@ etherpad_favicon: "favicon.ico"
 etherpad_ip: 0.0.0.0
 etherpad_port: 9001
 etherpad_show_settings_in_admin_page: "true"
+etherpad_enable_metrics: "true"
+etherpad_cleanup:
+  enabled: "false"
+  keepRevisions: 5
 etherpad_ssl_enabled: false
 etherpad_ssl_key: "/path-to-your/epl-server.key"
 etherpad_ssl_cert: "/path-to-your/epl-server.crt"
@@ -67,6 +71,7 @@ etherpad_pad_shortcut_cmd_h: "true"
 etherpad_pad_shortcut_ctrl_home: "true"
 etherpad_pad_shortcut_page_up: "true"
 etherpad_pad_shortcut_page_down: "true"
+etherpad_update_server: https://etherpad.org/ep_infos
 etherpad_suppress_errors_in_pad_text: "false"
 etherpad_require_session: "false"
 etherpad_edit_only: "false"
@@ -78,6 +83,7 @@ etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
 etherpad_trust_proxy: "false"
+etherpad_cookie_key_rotation_interval: 86400000 # = 1d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_cookie_same_site: "Lax"
 etherpad_cookie_session_lifetime: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_cookie_session_refresh_interval: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
@@ -117,11 +123,12 @@ etherpad_toolbar:
     - ["clearauthorship"]
   right:
     - ["importexport", "timeslider", "savedrevision"]
-    - ["settings", "embed"]
+    - ["settings", "embed", "home"]
     - ["showusers"]
   timeslider:
     - ["timeslider_export", "timeslider_returnToPad"]
 etherpad_log_level: "INFO"
+etherpad_log_layout_type: "colored"
 etherpad_abiword_enabled: false
 
 etherpad_redis_host: localhost
