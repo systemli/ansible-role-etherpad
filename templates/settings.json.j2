@@ -5,6 +5,8 @@
   "ip": "{{ etherpad_ip }}",
   "port" : {{ etherpad_port }},
   "showSettingsInAdminPage": {{ etherpad_show_settings_in_admin_page }},
+  "enableMetrics": {{ etherpad_enable_metrics }},
+  "cleanup": {{ etherpad_cleanup | to_nice_json }},
   "sessionKey": "{{ etherpad_session_key }}",
 {% if etherpad_ssl_enabled %}
   "ssl" : {
@@ -92,6 +94,7 @@
     "pageUp":    {{ etherpad_pad_shortcut_page_up }},
     "pageDown":  {{ etherpad_pad_shortcut_page_down }}
   },
+  "updateServer": "{{ etherpad_update_server }}",
   "suppressErrorsInPadText": {{ etherpad_suppress_errors_in_pad_text }},
   "requireSession": {{ etherpad_require_session }},
   "editOnly": {{ etherpad_edit_only }},
@@ -104,6 +107,7 @@
   "requireAuthorization": {{ etherpad_require_authorization }},
   "trustProxy": {{ etherpad_trust_proxy }},
   "cookie": {
+    "keyRotationInterval": {{ etherpad_cookie_key_rotation_interval }},
     "sameSite": "{{ etherpad_cookie_same_site }}",
     "sessionLifetime": {{ etherpad_cookie_session_lifetime }},
     "sessionRefreshInterval": {{ etherpad_cookie_session_refresh_interval }}
@@ -166,6 +170,7 @@
   "toolbar": {{ etherpad_toolbar|to_json }},
   "exposeVersion": {{ etherpad_expose_version }},
   "loglevel": "{{ etherpad_log_level }}",
+  "logLayoutType": "{{ etherpad_log_layout_type }}",
   "socketIo": {
     "maxHttpBufferSize": {{ etherpad_socket_max_http_buffer_size }}
   },
