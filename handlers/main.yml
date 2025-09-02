@@ -2,6 +2,7 @@
 - name: Install the dev depedecencies
   ansible.builtin.shell: |
     pnpm i
+    pnpm run build:etherpad
   args:
     executable: /bin/bash
     chdir: "{{ etherpad_path }}"
