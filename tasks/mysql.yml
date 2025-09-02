@@ -50,7 +50,7 @@
 - name: Register systemd version number
   ansible.builtin.shell: |
     set -o pipefail
-    systemd --version | head -1 | cut -d' ' -f2
+    systemctl --version | head -1 | cut -d' ' -f2
   args:
     executable: /bin/bash
   check_mode: no
