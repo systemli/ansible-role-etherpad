@@ -21,7 +21,3 @@ provisioner:
 
 lint: yamllint .
 
-#dependency:
-#  name: galaxy
-#  options:
-#    requirements-file: requirements.yml
