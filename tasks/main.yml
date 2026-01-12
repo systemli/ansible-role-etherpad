@@ -89,6 +89,10 @@
   ansible.builtin.import_tasks: abiword.yml
   when: etherpad_abiword_enabled
 
+- name: Import soffice tasks
+  ansible.builtin.import_tasks: soffice.yml
+  when: etherpad_soffice_enabled
+
 - name: Activate and start etherpad-lite
   ansible.builtin.service:
     name: etherpad-lite
