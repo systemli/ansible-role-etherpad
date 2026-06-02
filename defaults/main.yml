@@ -78,7 +78,7 @@ etherpad_edit_only: "false"
 etherpad_minify: "true"
 etherpad_max_age: 21600
 etherpad_abiword: "{{ '/usr/bin/abiword' if etherpad_abiword_enabled else 'null' }}"
-etherpad_soffice: "null"
+etherpad_soffice: "{{ '/usr/bin/soffice' if etherpad_soffice_enabled else 'null' }}"
 etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
@@ -130,6 +130,7 @@ etherpad_toolbar:
 etherpad_log_level: "INFO"
 etherpad_log_layout_type: "colored"
 etherpad_abiword_enabled: false
+etherpad_soffice_enabled: false
 
 etherpad_redis_host: localhost
 etherpad_redis_port: 6379

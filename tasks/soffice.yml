@@ -1,0 +1,5 @@
+---
+- name: Ensure libreoffice package is installed, to provide soffice
+  ansible.builtin.apt:
+    pkg: libreoffice
+    state: present
