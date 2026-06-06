@@ -85,10 +85,6 @@
     mode: "0644"
   when: etherpad_custom_logo_src is defined
 
-- name: Import abiword tasks
-  ansible.builtin.import_tasks: abiword.yml
-  when: etherpad_abiword_enabled
-
 - name: Import soffice tasks
   ansible.builtin.import_tasks: soffice.yml
   when: etherpad_soffice_enabled

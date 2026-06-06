@@ -1,5 +1,0 @@
----
-- name: Ensure abiword package is installed
-  ansible.builtin.apt:
-    pkg: abiword
-    state: present
