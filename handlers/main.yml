@@ -1,5 +1,21 @@
 ---
-- name: Build etherpad-lite
+- name: Install the dev depedecencies
+  ansible.builtin.shell: |
+    pnpm i
+    pnpm run build:etherpad
+  args:
+    executable: /bin/bash
+    chdir: "{{ etherpad_path }}"
+  environment:
+    NODE_ENV: "developement"
+    PATH: "{{ etherpad_environment_path }}"
+  check_mode: false
+  changed_when: true
+  become: true
+  become_user: "{{ etherpad_user }}"
+  listen: "Build etherpad-lite"
+
+- name: Build etherpad-lite with respect to the node environment
   ansible.builtin.shell: |
     pnpm i
     pnpm run build:etherpad
@@ -9,10 +25,11 @@
   environment:
     NODE_ENV: "{{ etherpad_node_environment }}"
     PATH: "{{ etherpad_environment_path }}"
-  become: true
-  become_user: "{{ etherpad_user }}"
   check_mode: false
   changed_when: true
+  become: true
+  become_user: "{{ etherpad_user }}"
+  listen: "Build etherpad-lite"
   notify: Restart etherpad-lite
 
 - name: Restart etherpad-lite
