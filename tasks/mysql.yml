@@ -5,7 +5,7 @@
     state: present
 
 - name: Create mysql database
-  community.mysql.mysql_db:
+  ansible.mysql.mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
     state: present
@@ -20,7 +20,7 @@
   when: database is changed
 
 - name: Import mysqldb schema # noqa no-handler
-  community.mysql.mysql_db:
+  ansible.mysql.mysql_db:
     name: "{{ etherpad_mysql_database_name }}"
     collation: "{{ etherpad_mysql_database_collation }}"
     state: import
@@ -40,7 +40,7 @@
   when: etherpad_mysql_database_password is undefined or etherpad_mysql_database_password | length == 0
 
 - name: Create mysql user
-  community.mysql.mysql_user:
+  ansible.mysql.mysql_user:
     name: "{{ etherpad_mysql_database_user }}"
     state: present
     password: "{{ etherpad_mysql_database_password }}"

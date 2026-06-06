@@ -5,6 +5,10 @@
 
 Role to install, configure & maintain Etherpad Lite. You can use this role to configure Etherpad with those storage solutions : MySQL (or MariaDB), Redis and PostgreSQL.
 
+## Requirements
+
+This role tracks the Etherpad 3.x release series (tested against Etherpad `3.2.0`). Etherpad 3.x requires **Node.js >= 24.0.0** and **pnpm >= 11.1.2** on the target host. Make sure a matching Node.js (e.g. via `geerlingguy.nodejs`) and `pnpm` are installed before running this role.
+
 Currently only MySQL allows to create the user and database. For PostgreSQL those operations should be done by your own (If you want or need to automate those tasks, you can probably use this role : geerlingguy.postgresql).
 
 This playbook also allows to install some plugins for Etherpad :
