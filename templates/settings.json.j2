@@ -18,7 +18,21 @@
     "installMethod": "{{ etherpad_updates_install_method }}",
     "checkIntervalHours": {{ etherpad_updates_check_interval_hours }}
   },
+  "adminOpenAPI": {
+    "enabled": {{ etherpad_admin_openapi_enabled }}
+  },
+  "adminEmail": {{ etherpad_admin_email | to_json }},
+  "mail": {
+    "host": {{ etherpad_mail_host | to_json }},
+    "port": {{ etherpad_mail_port }},
+    "secure": {{ etherpad_mail_secure }},
+    "from": {{ etherpad_mail_from | to_json }},
+    "auth": {{ etherpad_mail_auth | to_json }}
+  },
   "cleanup": {{ etherpad_cleanup | to_nice_json }},
+  "gdprAuthorErasure": {
+    "enabled": {{ etherpad_gdpr_author_erasure_enabled }}
+  },
   "sessionKey": "{{ etherpad_session_key }}",
 {% if etherpad_ssl_enabled %}
   "ssl" : {
@@ -112,6 +126,13 @@
   "privacy": {
     "updateCheck": {{ etherpad_privacy_update_check }},
     "pluginCatalog": {{ etherpad_privacy_plugin_catalog }}
+  },
+  "privacyBanner": {
+    "enabled": {{ etherpad_privacy_banner_enabled }},
+    "title": {{ etherpad_privacy_banner_title | to_json }},
+    "body": {{ etherpad_privacy_banner_body | to_json }},
+    "learnMoreUrl": {{ etherpad_privacy_banner_learn_more_url | to_json }},
+    "dismissal": "{{ etherpad_privacy_banner_dismissal }}"
   },
   "suppressErrorsInPadText": {{ etherpad_suppress_errors_in_pad_text }},
   "requireSession": {{ etherpad_require_session }},

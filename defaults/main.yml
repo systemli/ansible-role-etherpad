@@ -32,6 +32,25 @@ etherpad_updates_source: "github"
 etherpad_updates_channel: "stable"
 etherpad_updates_install_method: "auto"
 etherpad_updates_check_interval_hours: 6
+# Admin OpenAPI document at /admin/openapi.json
+etherpad_admin_openapi_enabled: "false"
+# Contact email for admin notifications (null to disable)
+etherpad_admin_email: null
+# Outbound SMTP for notifications. host null = log-only (no mail sent).
+# etherpad_mail_auth expects null or a mapping, e.g. {"user": "...", "pass": "..."}
+etherpad_mail_host: null
+etherpad_mail_port: 587
+etherpad_mail_secure: "false"
+etherpad_mail_from: null
+etherpad_mail_auth: null
+# GDPR Art. 17 author erasure REST endpoint
+etherpad_gdpr_author_erasure_enabled: "false"
+# Privacy banner shown on pad load
+etherpad_privacy_banner_enabled: "false"
+etherpad_privacy_banner_title: ""
+etherpad_privacy_banner_body: ""
+etherpad_privacy_banner_learn_more_url: null
+etherpad_privacy_banner_dismissal: "dismissible"
 etherpad_cleanup:
   enabled: "false"
   keepRevisions: 5
