@@ -1,3 +1,4 @@
 .molecule
 .tox
 molecule/*/.molecule
+.ansible/
