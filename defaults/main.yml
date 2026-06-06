@@ -23,6 +23,15 @@ etherpad_ip: 0.0.0.0
 etherpad_port: 9001
 etherpad_show_settings_in_admin_page: "true"
 etherpad_enable_metrics: "true"
+# Etherpad 3.x built-in updater. Defaults to "off" because this role manages
+# the Etherpad version via git/Ansible; a self-updater would conflict with the
+# checked-out revision. Set to "notify", "manual", "auto" or "autonomous" if
+# you want Etherpad to manage its own updates instead.
+etherpad_updates_tier: "off"
+etherpad_updates_source: "github"
+etherpad_updates_channel: "stable"
+etherpad_updates_install_method: "auto"
+etherpad_updates_check_interval_hours: 6
 etherpad_cleanup:
   enabled: "false"
   keepRevisions: 5
