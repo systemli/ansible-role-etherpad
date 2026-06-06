@@ -9,6 +9,7 @@
   environment:
     NODE_ENV: "{{ etherpad_node_environment }}"
     PATH: "{{ etherpad_environment_path }}"
+    CI: "true"
   become: true
   become_user: "{{ etherpad_user }}"
   check_mode: false
