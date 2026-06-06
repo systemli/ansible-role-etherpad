@@ -14,6 +14,11 @@ etherpad_path: "{{ etherpad_home }}/etherpad-lite"
 etherpad_node_environment: production
 etherpad_title: "Etherpad"
 etherpad_favicon: "favicon.ico"
+etherpad_show_recent_pads: "true"
+# Canonical public origin (e.g. "https://pad.example.com") used for Open Graph
+# tags. null disables it.
+etherpad_public_url: null
+etherpad_social_meta_description: null
 etherpad_ip: 0.0.0.0
 etherpad_port: 9001
 etherpad_show_settings_in_admin_page: "true"
@@ -52,6 +57,8 @@ etherpad_pad_options_rtl: "false"
 etherpad_pad_options_always_show_chat: "false"
 etherpad_pad_options_chat_and_users: "false"
 etherpad_pad_options_lang: "en-gb"
+etherpad_pad_options_fade_inactive_author_colors: "true"
+etherpad_pad_options_enforce_readable_author_colors: "true"
 etherpad_pad_shortcut_alt_f9: "true"
 etherpad_pad_shortcut_alt_c: "true"
 etherpad_pad_shortcut_cmd_shft_2: "true"
@@ -75,20 +82,27 @@ etherpad_pad_shortcut_ctrl_home: "true"
 etherpad_pad_shortcut_page_up: "true"
 etherpad_pad_shortcut_page_down: "true"
 etherpad_update_server: https://etherpad.org/ep_infos
+etherpad_privacy_update_check: "true"
+etherpad_privacy_plugin_catalog: "true"
 etherpad_suppress_errors_in_pad_text: "false"
 etherpad_require_session: "false"
 etherpad_edit_only: "false"
 etherpad_minify: "true"
 etherpad_max_age: 21600
 etherpad_soffice: "{{ '/usr/bin/soffice' if etherpad_soffice_enabled else 'null' }}"
+etherpad_docx_export: "true"
 etherpad_allow_unknown_file_ends: "true"
 etherpad_require_authentication: "false"
 etherpad_require_authorization: "false"
 etherpad_trust_proxy: "false"
+# Optional prefix for all Etherpad cookie names. Leave empty to disable.
+etherpad_cookie_prefix: ""
 etherpad_cookie_key_rotation_interval: 86400000 # = 1d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_cookie_same_site: "Lax"
 etherpad_cookie_session_lifetime: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
 etherpad_cookie_session_refresh_interval: 864000000 # = 10d * 24h/d * 60m/h * 60s/m * 1000ms/s
+etherpad_cookie_session_cleanup: "true"
+etherpad_allow_pad_deletion_by_all_users: "false"
 etherpad_socket_transport_protocols: ["websocket", "polling"]
 etherpad_load_test: "false"
 etherpad_indentation_on_new_line: "false"
@@ -103,6 +117,9 @@ etherpad_import_export_rate_limiting_max: 10
 etherpad_import_max_file_size: 52428800 # 50 * 1024 * 1024
 etherpad_custom_locale_strings: {}
 etherpad_enable_admin_ui_tests: "false"
+etherpad_enable_dark_mode: "true"
+etherpad_enable_pad_wide_settings: "true"
+etherpad_enable_plugin_pad_options: "false"
 etherpad_lower_case_pad_ids: "false"
 etherpad_authentication_method: "apikey" # or sso
 etherpad_sso_issuer: "http://localhost:9001"

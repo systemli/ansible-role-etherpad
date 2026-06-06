@@ -2,6 +2,11 @@
 {
   "title": "{{ etherpad_title }}",
   "favicon": "{{ etherpad_favicon }}",
+  "showRecentPads": {{ etherpad_show_recent_pads }},
+  "publicURL": {{ etherpad_public_url | to_json }},
+  "socialMeta": {
+    "description": {{ etherpad_social_meta_description | to_json }}
+  },
   "ip": "{{ etherpad_ip }}",
   "port" : {{ etherpad_port }},
   "showSettingsInAdminPage": {{ etherpad_show_settings_in_admin_page }},
@@ -68,7 +73,9 @@
     "rtl": {{ etherpad_pad_options_rtl }},
     "alwaysShowChat": {{ etherpad_pad_options_always_show_chat }},
     "chatAndUsers": {{ etherpad_pad_options_chat_and_users }},
-    "lang": "{{ etherpad_pad_options_lang }}"
+    "lang": "{{ etherpad_pad_options_lang }}",
+    "fadeInactiveAuthorColors": {{ etherpad_pad_options_fade_inactive_author_colors }},
+    "enforceReadableAuthorColors": {{ etherpad_pad_options_enforce_readable_author_colors }}
   },
   "padShortcutEnabled" : {
     "altF9":     {{ etherpad_pad_shortcut_alt_f9 }},
@@ -95,24 +102,34 @@
     "pageDown":  {{ etherpad_pad_shortcut_page_down }}
   },
   "updateServer": "{{ etherpad_update_server }}",
+  "privacy": {
+    "updateCheck": {{ etherpad_privacy_update_check }},
+    "pluginCatalog": {{ etherpad_privacy_plugin_catalog }}
+  },
   "suppressErrorsInPadText": {{ etherpad_suppress_errors_in_pad_text }},
   "requireSession": {{ etherpad_require_session }},
   "editOnly": {{ etherpad_edit_only }},
   "minify": {{ etherpad_minify }},
   "maxAge": {{ etherpad_max_age }},
   "soffice": {{ etherpad_soffice | to_json }},
+  "docxExport": {{ etherpad_docx_export }},
   "allowUnknownFileEnds": {{ etherpad_allow_unknown_file_ends }},
   "requireAuthentication": {{ etherpad_require_authentication }},
   "requireAuthorization": {{ etherpad_require_authorization }},
   "trustProxy": {{ etherpad_trust_proxy }},
   "cookie": {
+{% if etherpad_cookie_prefix | length > 0 %}
+    "prefix": "{{ etherpad_cookie_prefix }}",
+{% endif %}
     "keyRotationInterval": {{ etherpad_cookie_key_rotation_interval }},
     "sameSite": "{{ etherpad_cookie_same_site }}",
     "sessionLifetime": {{ etherpad_cookie_session_lifetime }},
-    "sessionRefreshInterval": {{ etherpad_cookie_session_refresh_interval }}
+    "sessionRefreshInterval": {{ etherpad_cookie_session_refresh_interval }},
+    "sessionCleanup": {{ etherpad_cookie_session_cleanup }}
   },
   "ipLogging": "{{ etherpad_ip_logging }}",
   "disableIPlogging": {{ etherpad_disable_ip_logging }},
+  "allowPadDeletionByAllUsers": {{ etherpad_allow_pad_deletion_by_all_users }},
   "automaticReconnectionTimeout": {{ etherpad_automatic_reconnection_timeout }},
   "scrollWhenFocusLineIsOutOfViewport": {
     "percentage": {
@@ -159,6 +176,12 @@
 {% if user.auth_author is defined and user.auth_author %}
       "author_name": "{{ user.name }}",
 {% endif %}
+{% if user.readOnly is defined %}
+      "readOnly": {{ user.readOnly | string | lower }},
+{% endif %}
+{% if user.canCreate is defined %}
+      "canCreate": {{ user.canCreate | string | lower }},
+{% endif %}
       "is_admin": {{ user.is_admin }}
     }{% if not loop.last %},{% endif %}
 
@@ -182,6 +205,9 @@
   "importMaxFileSize": {{ etherpad_import_max_file_size }},
   "customLocaleStrings": {{ etherpad_custom_locale_strings|to_json }},
   "enableAdminUITests": {{ etherpad_enable_admin_ui_tests }},
+  "enableDarkMode": {{ etherpad_enable_dark_mode }},
+  "enablePadWideSettings": {{ etherpad_enable_pad_wide_settings }},
+  "enablePluginPadOptions": {{ etherpad_enable_plugin_pad_options }},
   "authenticationMethod": {{ etherpad_authentication_method|to_json }},
   "lowerCasePadIds": {{ etherpad_lower_case_pad_ids }},
   "sso": {
