@@ -11,6 +11,13 @@
   "port" : {{ etherpad_port }},
   "showSettingsInAdminPage": {{ etherpad_show_settings_in_admin_page }},
   "enableMetrics": {{ etherpad_enable_metrics }},
+  "updates": {
+    "tier": "{{ etherpad_updates_tier }}",
+    "source": "{{ etherpad_updates_source }}",
+    "channel": "{{ etherpad_updates_channel }}",
+    "installMethod": "{{ etherpad_updates_install_method }}",
+    "checkIntervalHours": {{ etherpad_updates_check_interval_hours }}
+  },
   "cleanup": {{ etherpad_cleanup | to_nice_json }},
   "sessionKey": "{{ etherpad_session_key }}",
 {% if etherpad_ssl_enabled %}
