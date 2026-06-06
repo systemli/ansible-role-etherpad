@@ -36,6 +36,9 @@ etherpad_users: []
 #    is_admin: "true"
 etherpad_api_key: ""
 etherpad_session_key: "Y7sc5qSXw5aEBIDGsjfkyLJDV"
+# IP logging granularity for Etherpad 3.x: "anonymous", "truncated" or "full".
+# Takes precedence over the deprecated etherpad_disable_ip_logging.
+etherpad_ip_logging: "anonymous"
 etherpad_disable_ip_logging: "true"
 etherpad_default_text: "Welcome to Etherpad!\\n\\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\\n\\nGet involved with Etherpad at http:\\/\\/etherpad.org\\n"
 etherpad_pad_options_no_colors: "false"

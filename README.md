@@ -35,6 +35,9 @@ Those variables allow to configure Etherpad with PostgreSQL. To be able to use t
     etherpad_headerauth_displayname_header: x-authenticated-name
 Configuration values for the [ep_headerauth](https://www.npmjs.com/package/ep_headerauth) plugin (authentication with http header). If you want to use this plugin, `etherpad_trust_proxy` and `etherpad_require_authentication` must be set to True.
 
+    etherpad_ip_logging: "anonymous"
+Controls how client IP addresses are logged in Etherpad 3.x. Valid values are `anonymous`, `truncated` and `full`. This setting supersedes the deprecated `etherpad_disable_ip_logging` (which is still rendered for backwards compatibility, but `ipLogging` takes precedence).
+
 For more information about available variables (and their default values) : see `defaults/main.yml`
 
 ## Example Playbook
