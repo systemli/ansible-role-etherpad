@@ -50,15 +50,17 @@ For more information about available variables (and their default values) : see 
 
 ### Tests
 
-For developing and testing the role we use Github Actions, Molecule, and Docker. On the local environment you can easily test the role with
+For developing and testing the role we use GitHub Actions, Molecule (Docker driver) and `ansible-lint`. CI runs the Molecule scenario on Debian 12 and 13 and Ubuntu 22.04 and 24.04 (see `.github/workflows/main.yml`).
 
-Run local tests with:
+Run the tests locally with:
 
-    ```bash
-    molecule test
-    ```
+```bash
+molecule test
+```
 
-Requires Molecule, Docker to be installed.
+Use `molecule converge` to apply the role and `molecule login` to inspect the container. Select another distribution with `MOLECULE_DISTRO` (e.g. `MOLECULE_DISTRO=ubuntu2404 molecule test`).
+
+Requires Docker (or a compatible runtime), `molecule`, `molecule-plugins[docker]` and `ansible-lint`.
 
 ## License
 
