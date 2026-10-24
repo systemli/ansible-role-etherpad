@@ -1,11 +1,11 @@
 ---
 - name: Prepare
   hosts: all
-  become: True
+  become: true
   tasks:
     - name: Run the equivalent of "apt-get update" before installing packages
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
 
     - name: Install acl package
       ansible.builtin.apt:
