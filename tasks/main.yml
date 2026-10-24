@@ -93,4 +93,4 @@
   ansible.builtin.service:
     name: etherpad-lite
     state: started
-    enabled: yes
+    enabled: true

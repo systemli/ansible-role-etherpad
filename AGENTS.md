@@ -13,8 +13,7 @@ Ansible role that installs, configures and maintains Etherpad (3.x) on Debian an
 
 ## Checks
 
-- `ansible-lint .` must pass (config in `.ansible-lint`, `molecule/` and `.github/` are excluded)
-- `yamllint .` uses `.yamllint`
+- `ansible-lint .` must pass with the default configuration (no `.ansible-lint`)
 - `molecule test` runs the role in a container; CI runs it on Debian 12/13 and Ubuntu 22.04/24.04
 - `ansible-lint` creates `.ansible/`; it is git ignored, never commit it
 

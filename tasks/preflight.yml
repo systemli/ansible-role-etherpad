@@ -17,7 +17,7 @@
 - name: Check NodeJS is installed
   ansible.builtin.shell: node --version | sed 's/^.//'
   changed_when: false
-  check_mode: no
+  check_mode: false
   register: node_version
   ignore_errors: true
 
@@ -38,7 +38,7 @@
 - name: Check pnpm is installed
   ansible.builtin.command: pnpm --version
   changed_when: false
-  check_mode: no
+  check_mode: false
   register: pnpm_version
   ignore_errors: true
   environment:

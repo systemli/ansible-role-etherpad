@@ -16,7 +16,7 @@
   ansible.builtin.template:
     src: schema.sql.j2
     dest: /tmp/etherpad_schema.sql
-    mode: 0755
+    mode: "0755"
   when: database is changed
 
 - name: Import mysqldb schema # noqa no-handler
@@ -53,7 +53,7 @@
     systemctl --version | head -1 | cut -d' ' -f2
   args:
     executable: /bin/bash
-  check_mode: no
+  check_mode: false
   changed_when: false
   register: systemd_version
   when: etherpad_mysql_systemd_dropin_enabled
