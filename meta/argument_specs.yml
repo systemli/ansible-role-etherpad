@@ -1,0 +1,653 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure Etherpad (etherpad-lite) from git
+    description:
+      - Installs Etherpad from its git repository and renders C(settings.json). Node.js and pnpm are expected to be installed already (checked in a preflight).
+      - Most boolean-like settings are strings (C("true")/C("false")) because they are written verbatim into the JSON settings file.
+    options:
+      etherpad_required_packages:
+        type: list
+        elements: str
+        default:
+          - curl
+          - git
+          - procps
+      etherpad_repository:
+        type: str
+        default: https://github.com/ether/etherpad-lite.git
+      etherpad_repository_key_file_src:
+        type: str
+        default: ''
+      etherpad_repository_key_file:
+        type: str
+        default: ''
+      etherpad_repository_version:
+        type: str
+        default: master
+      etherpad_user:
+        type: str
+        default: etherpad
+      etherpad_group:
+        type: str
+        default: '{{ etherpad_user }}'
+      etherpad_home:
+        type: str
+        default: /home/etherpad
+      etherpad_path:
+        type: str
+        default: '{{ etherpad_home }}/etherpad-lite'
+      etherpad_node_environment:
+        type: str
+        default: production
+      etherpad_title:
+        type: str
+        default: Etherpad
+      etherpad_favicon:
+        type: str
+        default: favicon.ico
+      etherpad_show_recent_pads:
+        type: str
+        default: 'true'
+      etherpad_public_url:
+        type: str
+        description:
+          - Canonical public origin (e.g. "https://pad.example.com") used for Open Graph tags. null disables it.
+      etherpad_social_meta_description:
+        type: str
+      etherpad_ip:
+        type: str
+        default: 0.0.0.0
+      etherpad_port:
+        type: int
+        default: 9001
+      etherpad_show_settings_in_admin_page:
+        type: str
+        default: 'true'
+      etherpad_enable_metrics:
+        type: str
+        default: 'true'
+      etherpad_updates_tier:
+        type: str
+        choices:
+          - 'off'
+          - notify
+          - manual
+          - auto
+          - autonomous
+        description:
+          - Etherpad 3.x built-in updater. Defaults to "off" because this role manages the Etherpad version via git/Ansible; a self-updater would conflict with the checked-out revision. Set to "notify", "manual", "auto" or "autonomous" if you want Etherpad to manage its own updates instead.
+        default: 'off'
+      etherpad_updates_source:
+        type: str
+        default: github
+      etherpad_updates_channel:
+        type: str
+        default: stable
+      etherpad_updates_install_method:
+        type: str
+        default: auto
+      etherpad_updates_check_interval_hours:
+        type: int
+        default: 6
+      etherpad_admin_openapi_enabled:
+        type: str
+        description:
+          - Admin OpenAPI document at /admin/openapi.json
+        default: 'false'
+      etherpad_admin_email:
+        type: str
+        description:
+          - Contact email for admin notifications (null to disable)
+      etherpad_mail_host:
+        type: str
+        description:
+          - 'Outbound SMTP for notifications. host null = log-only (no mail sent). etherpad_mail_auth expects null or a mapping, e.g. {"user": "...", "pass": "..."}'
+      etherpad_mail_port:
+        type: int
+        default: 587
+      etherpad_mail_secure:
+        type: str
+        default: 'false'
+      etherpad_mail_from:
+        type: str
+      etherpad_mail_auth:
+        type: dict
+        description:
+          - 'Null or a mapping such as C({"user": "...", "pass": "..."}).'
+      etherpad_gdpr_author_erasure_enabled:
+        type: str
+        description:
+          - GDPR Art. 17 author erasure REST endpoint
+        default: 'false'
+      etherpad_privacy_banner_enabled:
+        type: str
+        description:
+          - Privacy banner shown on pad load
+        default: 'false'
+      etherpad_privacy_banner_title:
+        type: str
+        default: ''
+      etherpad_privacy_banner_body:
+        type: str
+        default: ''
+      etherpad_privacy_banner_learn_more_url:
+        type: str
+      etherpad_privacy_banner_dismissal:
+        type: str
+        default: dismissible
+      etherpad_cleanup:
+        type: dict
+        description:
+          - Settings of the cleanup feature, a dict with C(enabled) and C(keepRevisions).
+        default:
+          enabled: 'false'
+          keepRevisions: 5
+      etherpad_ssl_enabled:
+        type: bool
+        default: false
+      etherpad_ssl_key:
+        type: str
+        default: /path-to-your/epl-server.key
+      etherpad_ssl_cert:
+        type: str
+        default: /path-to-your/epl-server.crt
+      etherpad_ssl_ca_intermediate_cert1:
+        type: str
+        default: /path-to-your/epl-intermediate-cert1.crt
+      etherpad_ssl_ca_intermediate_cert2:
+        type: str
+        default: /path-to-your/epl-intermediate-cert2.crt
+      etherpad_skin_name:
+        type: str
+        default: colibris
+      etherpad_skin_variants:
+        type: str
+        default: super-light-toolbar light-background super-light-editor
+      etherpad_db_type:
+        type: str
+        default: dirty
+      etherpad_users:
+        type: list
+        elements: dict
+        default: []
+        options:
+          name:
+            type: str
+            required: true
+          password:
+            type: str
+            required: true
+          is_admin:
+            type: str
+            required: true
+            description:
+              - Written verbatim into settings.json, use C("true") or C("false").
+          auth_author:
+            type: bool
+            description:
+              - Prefix the user name with C(etherpad_auth_author_prefix) (ep_auth_author).
+          readOnly:
+            type: bool
+          canCreate:
+            type: bool
+      etherpad_api_key:
+        type: str
+        default: ''
+      etherpad_session_key:
+        type: str
+        default: Y7sc5qSXw5aEBIDGsjfkyLJDV
+      etherpad_ip_logging:
+        type: str
+        choices:
+          - anonymous
+          - truncated
+          - full
+        description:
+          - 'IP logging granularity for Etherpad 3.x: "anonymous", "truncated" or "full". Takes precedence over the deprecated etherpad_disable_ip_logging.'
+        default: anonymous
+      etherpad_disable_ip_logging:
+        type: str
+        default: 'true'
+      etherpad_default_text:
+        type: str
+        default: Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at http:\/\/etherpad.org\n
+      etherpad_pad_options_no_colors:
+        type: str
+        default: 'false'
+      etherpad_pad_options_show_controls:
+        type: str
+        default: 'true'
+      etherpad_pad_options_show_chat:
+        type: str
+        default: 'true'
+      etherpad_pad_options_show_line_numbers:
+        type: str
+        default: 'true'
+      etherpad_pad_options_use_monospace_font:
+        type: str
+        default: 'false'
+      etherpad_pad_options_user_name:
+        type: str
+        default: 'null'
+      etherpad_pad_options_user_color:
+        type: str
+        default: 'null'
+      etherpad_pad_options_rtl:
+        type: str
+        default: 'false'
+      etherpad_pad_options_always_show_chat:
+        type: str
+        default: 'false'
+      etherpad_pad_options_chat_and_users:
+        type: str
+        default: 'false'
+      etherpad_pad_options_lang:
+        type: str
+        default: en-gb
+      etherpad_pad_options_fade_inactive_author_colors:
+        type: str
+        default: 'true'
+      etherpad_pad_options_enforce_readable_author_colors:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_alt_f9:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_alt_c:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_shft_2:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_delete:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_return:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_esc:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_s:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_tab:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_z:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_y:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_i:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_b:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_u:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_5:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_shift_l:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_shift_n:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_shift_1:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_shift_c:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_cmd_h:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_ctrl_home:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_page_up:
+        type: str
+        default: 'true'
+      etherpad_pad_shortcut_page_down:
+        type: str
+        default: 'true'
+      etherpad_update_server:
+        type: str
+        default: https://etherpad.org/ep_infos
+      etherpad_privacy_update_check:
+        type: str
+        default: 'true'
+      etherpad_privacy_plugin_catalog:
+        type: str
+        default: 'true'
+      etherpad_suppress_errors_in_pad_text:
+        type: str
+        default: 'false'
+      etherpad_require_session:
+        type: str
+        default: 'false'
+      etherpad_edit_only:
+        type: str
+        default: 'false'
+      etherpad_minify:
+        type: str
+        default: 'true'
+      etherpad_max_age:
+        type: int
+        default: 21600
+      etherpad_soffice:
+        type: str
+        description:
+          - Path of soffice, rendered into settings.json. Defaults to C(/usr/bin/soffice) if C(etherpad_soffice_enabled) else C(null).
+        default: '{{ ''/usr/bin/soffice'' if etherpad_soffice_enabled else ''null'' }}'
+      etherpad_docx_export:
+        type: str
+        default: 'true'
+      etherpad_allow_unknown_file_ends:
+        type: str
+        default: 'true'
+      etherpad_require_authentication:
+        type: str
+        default: 'false'
+      etherpad_require_authorization:
+        type: str
+        default: 'false'
+      etherpad_trust_proxy:
+        type: str
+        default: 'false'
+      etherpad_cookie_prefix:
+        type: str
+        description:
+          - Optional prefix for all Etherpad cookie names. Leave empty to disable.
+        default: ''
+      etherpad_cookie_key_rotation_interval:
+        type: int
+        default: 86400000
+      etherpad_cookie_same_site:
+        type: str
+        default: Lax
+      etherpad_cookie_session_lifetime:
+        type: int
+        default: 864000000
+      etherpad_cookie_session_refresh_interval:
+        type: int
+        default: 864000000
+      etherpad_cookie_session_cleanup:
+        type: str
+        default: 'true'
+      etherpad_allow_pad_deletion_by_all_users:
+        type: str
+        default: 'false'
+      etherpad_socket_transport_protocols:
+        type: list
+        elements: str
+        default:
+          - websocket
+          - polling
+      etherpad_load_test:
+        type: str
+        default: 'false'
+      etherpad_indentation_on_new_line:
+        type: str
+        default: 'false'
+      etherpad_automatic_reconnection_timeout:
+        type: int
+        default: 0
+      etherpad_commit_rate_limiting_duration:
+        type: int
+        default: 1
+      etherpad_commit_rate_limiting_points:
+        type: int
+        default: 10
+      etherpad_expose_version:
+        type: str
+        default: 'false'
+      etherpad_socket_max_http_buffer_size:
+        type: int
+        default: 10000
+      etherpad_dump_on_unclean_exit:
+        type: str
+        default: 'false'
+      etherpad_import_export_rate_limiting_window_ms:
+        type: int
+        default: 90000
+      etherpad_import_export_rate_limiting_max:
+        type: int
+        default: 10
+      etherpad_import_max_file_size:
+        type: int
+        default: 52428800
+      etherpad_custom_locale_strings:
+        type: dict
+        description:
+          - Mapping of locale to a mapping of overridden strings.
+        default: {}
+      etherpad_enable_admin_ui_tests:
+        type: str
+        default: 'false'
+      etherpad_enable_dark_mode:
+        type: str
+        default: 'true'
+      etherpad_enable_pad_wide_settings:
+        type: str
+        default: 'true'
+      etherpad_enable_plugin_pad_options:
+        type: str
+        default: 'false'
+      etherpad_lower_case_pad_ids:
+        type: str
+        default: 'false'
+      etherpad_authentication_method:
+        type: str
+        choices:
+          - apikey
+          - sso
+        default: apikey
+      etherpad_sso_issuer:
+        type: str
+        default: http://localhost:9001
+      etherpad_sso_clients:
+        type: list
+        elements: dict
+        description:
+          - OIDC clients (required to be non-empty if C(etherpad_authentication_method=sso)).
+        default: []
+        options:
+          client_id:
+            type: str
+          client_secret:
+            type: str
+          grant_types:
+            type: list
+            elements: str
+          response_types:
+            type: list
+            elements: str
+          redirect_uris:
+            type: list
+            elements: str
+      etherpad_sso_ttl_access_token:
+        type: int
+        default: 3600
+      etherpad_sso_ttl_authorization_code:
+        type: int
+        default: 600
+      etherpad_sso_ttl_client_credentials:
+        type: int
+        default: 3600
+      etherpad_sso_ttl_id_token:
+        type: int
+        default: 3600
+      etherpad_sso_ttl_refresh_token:
+        type: int
+        default: 86400
+      etherpad_toolbar:
+        type: dict
+        description:
+          - Toolbar layout with the keys C(left), C(right) and C(timeslider), each a list of lists of button names.
+        default:
+          left:
+            - - bold
+              - italic
+              - underline
+              - strikethrough
+            - - orderedlist
+              - unorderedlist
+              - indent
+              - outdent
+            - - undo
+              - redo
+            - - clearauthorship
+          right:
+            - - importexport
+              - timeslider
+              - savedrevision
+            - - settings
+              - embed
+              - home
+            - - showusers
+          timeslider:
+            - - timeslider_export
+              - timeslider_returnToPad
+      etherpad_log_level:
+        type: str
+        default: INFO
+      etherpad_log_layout_type:
+        type: str
+        default: colored
+      etherpad_soffice_enabled:
+        type: bool
+        default: false
+      etherpad_redis_host:
+        type: str
+        default: localhost
+      etherpad_redis_port:
+        type: int
+        default: 6379
+      etherpad_redis_database:
+        type: int
+        default: 0
+      etherpad_mysql_database_host:
+        type: str
+        default: localhost
+      etherpad_mysql_database_name:
+        type: str
+        default: etherpad
+      etherpad_mysql_database_user:
+        type: str
+        default: etherpad
+      etherpad_mysql_database_password:
+        type: str
+      etherpad_mysql_database_port:
+        type: int
+        default: 3306
+      etherpad_mysql_database_engine:
+        type: str
+        description:
+          - Recommendation for large setups is MyISAM
+        default: InnoDB
+      etherpad_mysql_database_collation:
+        type: str
+        default: utf8mb4_bin
+      etherpad_mysql_database_charset:
+        type: str
+        default: utf8mb4
+      etherpad_postgres_database_host:
+        type: str
+        description:
+          - PostgreSQL configuration
+        default: localhost
+      etherpad_postgres_database_name:
+        type: str
+        default: etherpad
+      etherpad_postgres_database_user:
+        type: str
+        default: etherpad
+      etherpad_postgres_database_password:
+        type: str
+      etherpad_postgres_database_port:
+        type: int
+        default: 5432
+      etherpad_postgres_database_ssl_policy:
+        type: str
+        default: disabled
+      etherpad_mysql_systemd_dropin_enabled:
+        type: bool
+        description:
+          - Values for systemd dropin, to ensure service is restarted for 10 minutes every minute
+        default: false
+      etherpad_mysql_systemd_dropin_service_restart:
+        type: str
+        default: always
+      etherpad_mysql_systemd_dropin_service_restartsec:
+        type: str
+        default: '60'
+      etherpad_mysql_systemd_dropin_unit_startlimitinterval:
+        type: str
+        default: '60'
+      etherpad_mysql_systemd_dropin_unit_startlimitburst:
+        type: str
+        default: '10'
+      etherpad_dirty_filename:
+        type: str
+        description:
+          - Database file when C(etherpad_db_type=dirty).
+        default: var/dirty.db
+      etherpad_plugins:
+        type: list
+        elements: str
+        description:
+          - Installed plugins. The role does not install plugins, this only enables their settings (ep_table_of_contents, ep_auth_author, ep_delete_after_delay, ep_headerauth).
+        default: []
+      etherpad_toc_disable:
+        type: str
+        description:
+          - Settings for plugin 'ep_table_of_contents'
+        default: 'true'
+      etherpad_delete_after_delay:
+        type: int
+        description:
+          - Settings for plugin 'ep_delete_after_delay'
+        default: 86400
+      etherpad_delete_after_delay_loop:
+        type: bool
+        default: true
+      etherpad_delete_after_delay_loopdelay:
+        type: int
+        default: 3600
+      etherpad_delete_after_delay_deleteatstart:
+        type: bool
+        default: true
+      etherpad_delete_after_delay_text:
+        type: str
+        default: The content of this pad has been deleted since it was older than the configured delay.
+      etherpad_headerauth_username_header:
+        type: str
+        description:
+          - Settings for plugin ep_headerauth
+        default: x-authenticated-user
+      etherpad_headerauth_displayname_header:
+        type: str
+        default: x-authenticated-name
+      etherpad_python_mysql_package:
+        type: str
+        description:
+          - Change to "python-pymysql" on python2 systems
+        default: python3-mysqldb
+      etherpad_environment_path:
+        type: str
+        default: /usr/local/bin:/usr/bin:/bin:/usr/local/lib/npm/bin
+      etherpad_auth_author_prefix:
+        type: str
+        description:
+          - Prefix for ep_auth_author user names.
+      etherpad_custom_logo_src:
+        type: str
+        description:
+          - Local path of a logo file copied to C(src/static/) of Etherpad.
