@@ -2,3 +2,4 @@
 .tox
 molecule/*/.molecule
 .ansible/
+.idea/
