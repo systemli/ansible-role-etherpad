@@ -56,7 +56,9 @@ argument_specs:
           - auto
           - autonomous
         description:
-          - Etherpad 3.x built-in updater. Defaults to "off" because this role manages the Etherpad version via git/Ansible; a self-updater would conflict with the checked-out revision. Set to "notify", "manual", "auto" or "autonomous" if you want Etherpad to manage its own updates instead.
+          - Etherpad 3.x built-in updater. Defaults to "off" because this role manages the Etherpad version via git/Ansible; a
+            self-updater would conflict with the checked-out revision. Set to "notify", "manual", "auto" or "autonomous" if you want
+            Etherpad to manage its own updates instead.
       etherpad_updates_source:
         type: str
       etherpad_updates_channel:
@@ -76,7 +78,8 @@ argument_specs:
       etherpad_mail_host:
         type: str
         description:
-          - 'Outbound SMTP for notifications. host null = log-only (no mail sent). etherpad_mail_auth expects null or a mapping, e.g. {"user": "...", "pass": "..."}'
+          - 'Outbound SMTP for notifications. host null = log-only (no mail sent). etherpad_mail_auth expects null or a mapping,
+            e.g. {"user": "...", "pass": "..."}'
       etherpad_mail_port:
         type: int
       etherpad_mail_secure:
@@ -421,7 +424,8 @@ argument_specs:
         type: list
         elements: str
         description:
-          - Installed plugins. The role does not install plugins, this only enables their settings (ep_table_of_contents, ep_auth_author, ep_delete_after_delay, ep_headerauth).
+          - Installed plugins. The role does not install plugins, this only enables their settings (ep_table_of_contents,
+            ep_auth_author, ep_delete_after_delay, ep_headerauth).
       etherpad_toc_disable:
         type: str
         description:
